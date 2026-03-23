@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cryptexa | Asset Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <main id="app-container">
+    <div id="coin-detail" class="view">
+      
+      <div class="back-bar">
+        <a href="index.html" class="btn-ghost" style="text-decoration:none">← BACK TO MATRIX</a>
+      </div>
+
+      <div class="detail-grid">
+        <div class="glass-panel">
+          <div class="flex-between" style="border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:20px; margin-bottom:24px;">
+            <div class="flex gap-16">
+              <div class="coin-avatar" style="width:64px; height:64px;"><img id="cd-img" src="" alt=""></div>
+              <div>
+                <h2 id="cd-name" style="font-size:2rem; margin-bottom:4px;">--</h2>
+                <div class="flex gap-10">
+                  <span class="coin-rank" id="cd-rank">--</span>
+                  <span class="coin-symbol text-muted" id="cd-sym" style="font-size:1.1rem">--</span>
+                </div>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div class="coin-price" id="cd-price" style="font-size:2.4rem;">--</div>
+              <div class="cd-change" id="cd-change">--</div>
+            </div>
+          </div>
+
+          <div class="detail-stats">
+            <div class="stat-box"><div class="stat-label">Market Cap</div><div class="stat-value" id="cd-mc">--</div></div>
+            <div class="stat-box"><div class="stat-label">Volume (24h)</div><div class="stat-value" id="cd-vol">--</div></div>
+            <div class="stat-box"><div class="stat-label">Circulating Supply</div><div class="stat-value" id="cd-sup" style="font-size:1rem">--</div></div>
+            <div class="stat-box"><div class="stat-label">All Time High</div><div class="stat-value" id="cd-ath">--</div><div class="text-xs text-muted" style="margin-top:4px">Distance: <span id="cd-athd" class="text-red">--</span></div></div>
+          </div>
+
+          <div class="section-label mt-24">Network Layer Latency</div>
+          <div class="oc-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
+            <div><div class="oc-label">Node Synchronization</div><div class="text-xs text-muted">Real-time unconfirmed mempool depth</div></div>
+            <div class="oc-val" id="cd-layer">--</div>
+          </div>
+
+          <div class="section-label mt-24">Price Action (30D)</div>
+          <div class="main-chart-box"><canvas id="main-chart"></canvas></div>
+        </div>
+
+        <div class="flex" style="flex-direction:column; gap:24px;">
+          <div class="glass-panel" style="width:100%">
+            <div class="section-label">Automated Assessment</div>
+            
+            <div class="ring-outer">
+              <div class="ring-wrap">
+                <svg width="140" height="140" class="ring-svg">
+                  <circle class="ring-bg" cx="70" cy="70" r="46" stroke-width="8"></circle>
+                  <circle class="ring-fill" id="ring-rs" cx="70" cy="70" r="46" stroke-width="8" stroke-dasharray="290" stroke-dashoffset="290"></circle>
+                </svg>
+                <div class="ring-inner">
+                  <div class="ring-val" id="val-rs">--</div>
+                  <div class="ring-sub">REALITY SCORE</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="de-box" class="glass-panel decision-engine">
+              <div class="de-pulse" id="de-pulse"></div>
+              <div class="de-emoji" id="de-emoji">--</div>
+              <div class="de-label" id="de-label">--</div>
+              <div class="de-conf" id="de-conf">--</div>
+            </div>
+            
+            <div class="section-label mt-24">Manipulation Fingerprint</div>
+            
+            <div class="svc-row">
+              <div class="svc-labels"><span class="text-muted">Social Hype Multiplier</span><span id="txt-hype"></span></div>
+              <div class="svc-track"><div class="svc-fill" id="fill-hype"></div></div>
+            </div>
+            <div class="svc-row">
+              <div class="svc-labels"><span class="text-muted">Smart Money Accumulation</span><span id="txt-smart"></span></div>
+              <div class="svc-track"><div class="svc-fill" id="fill-smart"></div></div>
+            </div>
+            <div class="svc-row mb-8">
+              <div class="svc-labels"><span class="text-muted">Retail FOMO Index</span><span id="txt-fomo"></span></div>
+              <div class="svc-track"><div class="svc-fill" id="fill-fomo"></div></div>
+            </div>
+
+            <button class="btn mt-24 w-100" id="btn-sim" style="width:100%">Open Simulator</button>
+          </div>
+
+          <div class="glass-panel" style="width:100%">
+            <div class="section-label">Market Storyteller AI</div>
+            <div class="ai-story" id="ai-story">
+              <div class="ai-story-label">SYNTHESIS</div>
+              <span id="ai-story-text">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

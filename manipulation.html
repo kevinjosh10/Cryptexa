@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cryptexa | Manipulation Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <main id="app-container">
+    <div id="manipulation-lab" class="view">
+      <div class="dashboard-header" style="justify-content:flex-start; margin-bottom:32px;">
+        <h1 class="page-title" style="margin-bottom:0; margin-right:32px;">Manipulation Lab</h1>
+        <div class="filter-bar" style="margin-bottom:0; padding-bottom:8px;">
+          <button class="filter-btn active" data-mode="sim">What-If Simulator</button>
+          <button class="filter-btn" data-mode="rep">Replay Engine</button>
+        </div>
+      </div>
+
+      <div class="lab-grid">
+        <div id="panel-sim" class="glass-panel">
+          <div class="section-label mb-24 text-blue" id="sim-coin-lbl">Simulation Asset: --</div>
+          
+          <div class="slider-group">
+            <label>Wash Trading Volume Threshold <span id="val-wash">10%</span></label>
+            <input type="range" id="sim-wash" min="0" max="100" value="10">
+          </div>
+          <div class="slider-group">
+            <label>Orderbook Spoofing Detection <span id="val-spoof">10%</span></label>
+            <input type="range" id="sim-spoof" min="0" max="100" value="10">
+          </div>
+          <div class="slider-group">
+            <label>Retail FOMO Social Multiplier <span id="val-fomo">50</span></label>
+            <input type="range" id="sim-fomo" min="0" max="100" value="50">
+          </div>
+
+          <div class="sim-result">
+            <div class="section-label" style="justify-content:center">Adjusted Reality Score</div>
+            <div class="sim-score-big text-green" id="sim-score">85</div>
+            <div class="text-sm text-muted">Removing simulated manipulation artifacts reveals the true underlying asset strength.</div>
+          </div>
+        </div>
+
+        <div id="panel-rep" class="glass-panel" style="display:none">
+          <div class="section-label mb-24" id="rep-coin-lbl">Analyzing: --</div>
+          
+          <div class="replay-step" id="rs-1">
+            <div class="rs-ico">🔍</div>
+            <div class="rs-text"><div class="rs-title">Isolating Smart Money Wallets</div><div class="rs-desc">Filtering out retail noise to track top 100 accumulators.</div></div>
+            <div class="rs-time">T-0.0s</div>
+          </div>
+          <div class="replay-step" id="rs-2">
+            <div class="rs-ico">🧼</div>
+            <div class="rs-text"><div class="rs-title">Scrubbing Wash Trading</div><div class="rs-desc">Removing circular trading volume on tier-2 exchanges.</div></div>
+            <div class="rs-time">T-1.5s</div>
+          </div>
+          <div class="replay-step" id="rs-3">
+            <div class="rs-ico">📉</div>
+            <div class="rs-text"><div class="rs-title">Orderbook De-spoofing</div><div class="rs-desc">Identifying and ignoring fake sell walls.</div></div>
+            <div class="rs-time">T-3.0s</div>
+          </div>
+          <div class="replay-step" id="rs-4">
+            <div class="rs-ico">🧠</div>
+            <div class="rs-text"><div class="rs-title">Reality Score Calculation</div><div class="rs-desc">Final synthesis of clean on-chain data.</div></div>
+            <div class="rs-time">T-4.5s</div>
+          </div>
+
+          <button class="btn mt-16 w-100" id="btn-play" style="width:100%">Run Engine Analysis</button>
+        </div>
+
+        <div class="glass-panel">
+          <div class="section-label">Live Manipulation Fingerprint</div>
+          <div class="text-sm text-muted mb-16">Real-time heat map of detected artificial activity across the market.</div>
+          <div class="fp-grid" id="fp-grid"></div>
+          
+          <div class="section-label mt-24">Impact Analysis</div>
+          <div class="replay-chart-box"><canvas id="replay-chart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Just a quick script to generate fingerprint randomly
+    document.addEventListener('DOMContentLoaded', () => {
+      const g = document.getElementById('fp-grid');
+      if(g) {
+        g.innerHTML = Array(120).fill(0).map(()=> {
+          const r = Math.random();
+          let c = 'rgba(255,255,255,0.05)';
+          if(r > 0.95) c = 'var(--danger)';
+          else if(r > 0.85) c = 'var(--alert)';
+          else if(r > 0.7) c = 'var(--highlight)';
+          return `<div style="height:20px; background:${c}; border-radius:2px;"></div>`;
+        }).join('');
+      }
+    });
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

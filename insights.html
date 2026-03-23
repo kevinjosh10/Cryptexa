@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cryptexa | Insights Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="bg-orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+
+  <main id="app-container">
+    <div id="insights-lab" class="view">
+      <div class="dashboard-header" style="justify-content:flex-start; margin-bottom:32px;">
+        <h1 class="page-title" style="margin-bottom:0">Deep Insights Lab</h1>
+      </div>
+
+      <div class="insights-grid">
+        <div class="glass-panel">
+          <div class="section-label">Global Crowd Madness Index</div>
+          <div class="text-sm text-muted mb-24">Aggregating social sentiment, retail participation, and leverage ratios.</div>
+          
+          <div class="madness-gauge">
+            <svg viewBox="0 0 200 100" style="width:100%; height:100%; overflow:visible;">
+              <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="16" stroke-linecap="round"></path>
+              <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="var(--danger)" stroke-width="16" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="60"></path>
+            </svg>
+            <div class="madness-center">
+              <div class="madness-label text-red">78</div>
+              <div class="madness-sub">EXTREME GREED</div>
+            </div>
+          </div>
+          
+          <div class="divider"></div>
+          
+          <div class="mad-row"><div class="mad-lbl">Twitter Euphoria</div><div class="mad-track"><div class="mad-fill" style="width:0"></div></div><div class="mad-num">82</div></div>
+          <div class="mad-row"><div class="mad-lbl">Retail Leverage</div><div class="mad-track"><div class="mad-fill" style="width:0"></div></div><div class="mad-num">91</div></div>
+          <div class="mad-row"><div class="mad-lbl">Google Trends</div><div class="mad-track"><div class="mad-fill" style="width:0"></div></div><div class="mad-num">64</div></div>
+        </div>
+
+        <div class="glass-panel">
+          <div class="section-label">Attention Gravity Map</div>
+          <div class="text-sm text-muted mb-24">Real-time liquidity gravitational pull driven by narrative momentum.</div>
+          <div class="gravity-map" id="gravity-map">
+            <!-- Bubbles mapped by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel">
+        <div class="section-label mb-24">Virality DNA Vectors</div>
+        <div class="grid-3">
+          <div><div class="vdna"><div class="vdna-bar" style="height:30%; background:var(--highlight)"></div><div class="vdna-bar" style="height:70%; background:var(--alert)"></div></div><div class="text-xs mt-8 font-weight-600 text-muted">Layer 1 Narratives</div></div>
+          <div><div class="vdna"><div class="vdna-bar" style="height:80%; background:var(--danger)"></div><div class="vdna-bar" style="height:20%; background:var(--bg-blue)"></div></div><div class="text-xs mt-8 font-weight-600 text-muted">Memecoin Virality</div></div>
+          <div><div class="vdna"><div class="vdna-bar" style="height:40%; background:var(--positive)"></div><div class="vdna-bar" style="height:60%; background:var(--glass-border)"></div></div><div class="text-xs mt-8 font-weight-600 text-muted">DeFi Resurgence</div></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
