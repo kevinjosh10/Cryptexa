@@ -1,18 +1,15 @@
-import { Store } from '../store.js';
-import { CHART_DEFAULTS } from '../components/chartConfig.js';
-import { renderCoinCard } from '../components/coinCard.js';
 
 let filterState = 'all';
 let sortState = 'default';
 let globalQuery = '';
 let dashboardCharts = [];
 
-export function renderDashboard() {
+function renderDashboard() {
   updateMarketBar();
   drawGrid();
 }
 
-export function drawGrid() {
+function drawGrid() {
   const grid = document.getElementById('dashboard-grid');
   if (!grid) return;
 
@@ -92,7 +89,7 @@ function updateCount(n) {
   if (c) c.textContent = n;
 }
 
-export function bindHomeEvents() {
+function bindHomeEvents() {
   document.querySelectorAll('.filter-btn').forEach(b => {
     b.addEventListener('click', (e) => {
       document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));

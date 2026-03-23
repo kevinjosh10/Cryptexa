@@ -1,8 +1,7 @@
-import { Store } from '../store.js';
 
 let replayInterval;
 
-export function initTimeTravel() {
+function initTimeTravel() {
   document.querySelectorAll('.era-card').forEach(c => {
     c.addEventListener('click', (e) => {
       document.querySelectorAll('.era-card').forEach(x => x.classList.remove('selected'));

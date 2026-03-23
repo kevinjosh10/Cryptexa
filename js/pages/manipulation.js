@@ -1,13 +1,10 @@
-import { Store } from '../store.js';
-import { rnd } from '../utils.js';
-import { CHART_DEFAULTS, gridOpts, tickOpts } from '../components/chartConfig.js';
 
 let activeLabMode = 'sim';
 let activeLabCoin = null;
 let replayState = 0;
 let replayChart = null;
 
-export function initManipulationLab() {
+function initManipulationLab() {
   const urlParams = new URLSearchParams(window.location.search);
   const idParam = urlParams.get('id');
   

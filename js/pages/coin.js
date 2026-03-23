@@ -1,12 +1,8 @@
-import { Store } from '../store.js';
-import { CHART_DEFAULTS, gridOpts, tickOpts } from '../components/chartConfig.js';
-import { rnd } from '../utils.js';
-import { toast } from '../components/alerts.js';
 
 let chartInstance = null;
 let activeCoinId = null;
 
-export function initCoinPage() {
+function initCoinPage() {
   const urlParams = new URLSearchParams(window.location.search);
   activeCoinId = urlParams.get('id');
   if (!activeCoinId) {

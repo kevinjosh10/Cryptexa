@@ -1,4 +1,4 @@
-export function renderNavbar(activePath) {
+function renderNavbar(activePath) {
   const navHTML = `
     <nav id="navbar">
       <a href="index.html" class="nav-brand">

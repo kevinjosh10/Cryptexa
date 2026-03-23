@@ -1,4 +1,4 @@
-export const CHART_DEFAULTS = {
+const CHART_DEFAULTS = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -20,5 +20,5 @@ export const CHART_DEFAULTS = {
   interaction: { mode: 'nearest', axis: 'x', intersect: false }
 };
 
-export const gridOpts = { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false };
-export const tickOpts = { color: '#8896C0', font: { family: 'Inter', size: 10 } };
+const gridOpts = { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false };
+const tickOpts = { color: '#8896C0', font: { family: 'Inter', size: 10 } };

@@ -1,14 +1,10 @@
-import { Store } from './store.js';
-import { STATIC_DATA } from './data.js';
-import { sampleSparkline, fakeHist, fmtLarge, fmtSupply, fmtAth } from './utils.js';
-import { computeFields } from './realityScore.js';
 
 const CG_KEY = 'CG-ZieMdW15Bh6P9zGjgUegF4yJ';
 const CG_BASE = 'https://api.coingecko.com/api/v3';
 const CG_IDS = 'bitcoin,ethereum,binancecoin,solana,ripple,cardano,avalanche-2,chainlink,polkadot,matic-network,arbitrum,injective-protocol,celestia,dogecoin,shiba-inu,pepe,dogwifhat,floki';
 const CG_HEADERS = { 'x-cg-demo-api-key': CG_KEY };
 
-export async function fetchCGData() {
+async function fetchCGData() {
   if (Store.isRefreshing) return;
   Store.isRefreshing = true;
   setRefreshState('loading');
@@ -59,7 +55,7 @@ export async function fetchCGData() {
   }
 }
 
-export function mergeMarkets(markets) {
+function mergeMarkets(markets) {
   const mapped = [];
   markets.forEach(m => {
     const s = STATIC_DATA[m.id];
@@ -90,7 +86,7 @@ export function mergeMarkets(markets) {
   }
 }
 
-export function buildStaticCoins() {
+function buildStaticCoins() {
   Store.COINS.length = 0;
   Object.values(STATIC_DATA).forEach((s, i) => {
     const c = { ...s, price: 0, change: 0, change7d: 0, mcap: '—', mcapRaw: 0, vol: '—', supply: '—', rank: i + 1, image: '', hist: fakeHist(100) };

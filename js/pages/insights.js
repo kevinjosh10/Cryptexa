@@ -1,6 +1,5 @@
-import { Store } from '../store.js';
 
-export function initInsightsLab() {
+function initInsightsLab() {
   document.addEventListener('marketDataUpdated', renderInsights);
   if (Store.COINS.length > 0) renderInsights();
 

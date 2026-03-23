@@ -1,8 +1,8 @@
-export function rnd(a, b) {
+function rnd(a, b) {
   return Math.random() * (b - a) + a;
 }
 
-export function fmtLarge(n) {
+function fmtLarge(n) {
   if (!n || isNaN(n)) return '—';
   if (n >= 1e12) return '$' + (n / 1e12).toFixed(2) + 'T';
   if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
@@ -10,7 +10,7 @@ export function fmtLarge(n) {
   return '$' + n.toLocaleString();
 }
 
-export function fmtSupply(n, sym) {
+function fmtSupply(n, sym) {
   if (!n || isNaN(n)) return '—';
   if (n >= 1e12) return (n / 1e12).toFixed(2) + 'T ' + sym;
   if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B ' + sym;
@@ -18,7 +18,7 @@ export function fmtSupply(n, sym) {
   return n.toLocaleString() + ' ' + sym;
 }
 
-export function fmtPrice(p) {
+function fmtPrice(p) {
   if (!p || isNaN(p)) return '$0.00';
   if (p >= 1000) return '$' + p.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   if (p >= 1) return '$' + p.toFixed(4);
@@ -26,12 +26,12 @@ export function fmtPrice(p) {
   return '$' + p.toFixed(8);
 }
 
-export function fmtAth(n) {
+function fmtAth(n) {
   if (!n || isNaN(n)) return '—';
   return fmtPrice(n);
 }
 
-export function sampleSparkline(arr, n = 30) {
+function sampleSparkline(arr, n = 30) {
   if (!arr || !arr.length) return [];
   const step = Math.max(1, Math.floor(arr.length / n));
   const out = [];
@@ -39,7 +39,7 @@ export function sampleSparkline(arr, n = 30) {
   return out;
 }
 
-export function fakeHist(price) {
+function fakeHist(price) {
   const out = [];
   let v = price * 0.85;
   for (let i = 0; i < 30; i++) {

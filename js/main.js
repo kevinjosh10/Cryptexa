@@ -1,13 +1,4 @@
-import { renderNavbar } from './components/navbar.js';
-import { renderStatusBar } from './components/statusbar.js';
-import { renderAlertsContainer, startRandomAlerts } from './components/alerts.js';
-import { fetchCGData, buildStaticCoins } from './api.js';
 
-import { bindHomeEvents } from './pages/home.js';
-import { initCoinPage } from './pages/coin.js';
-import { initManipulationLab } from './pages/manipulation.js';
-import { initInsightsLab } from './pages/insights.js';
-import { initTimeTravel } from './pages/timetravel.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const path = window.location.pathname;

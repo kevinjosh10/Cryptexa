@@ -1,4 +1,4 @@
-export const Store = {
+const Store = {
   COINS: [],
   lastRefresh: null,
   globalData: null,

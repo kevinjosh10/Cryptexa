@@ -1,4 +1,4 @@
-export function renderCoinCard(c) {
+function renderCoinCard(c) {
   const isUp = c.change >= 0;
   const isUp7 = c.change7d >= 0;
   const rank = c.rank !== 99 ? `<span class="coin-rank">#${c.rank}</span>` : '';

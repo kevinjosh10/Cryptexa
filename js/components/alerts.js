@@ -1,8 +1,8 @@
-export function renderAlertsContainer() {
+function renderAlertsContainer() {
   document.body.insertAdjacentHTML('beforeend', '<div id="alerts-container"></div>');
 }
 
-export function toast(title, msg, type = 'info') {
+function toast(title, msg, type = 'info') {
   const c = document.getElementById('alerts-container');
   if (!c) return;
   const t = document.createElement('div');
@@ -33,7 +33,7 @@ const ALERTS = [
   { t: "Network Congestion", m: "ETH gas fees spiking due to NFT minting event.", y: "info" }
 ];
 
-export function startRandomAlerts() {
+function startRandomAlerts() {
   setInterval(() => {
     if (Math.random() > 0.7) {
       const a = ALERTS[Math.floor(Math.random() * ALERTS.length)];
