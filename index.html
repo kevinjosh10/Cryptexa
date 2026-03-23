@@ -49,7 +49,6 @@ h1,h2,h3,h4,.sg{font-family:'Space Grotesk',sans-serif}
 /* ============================================================
    ANIMATED BACKGROUND
 ============================================================ */
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbFloat 12s ease-in-out infinite alternate;opacity:0.35}
 .orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(32,14,115,0.8),transparent);left:-150px;top:-100px;animation-delay:0s}
@@ -74,7 +73,6 @@ h1,h2,h3,h4,.sg{font-family:'Space Grotesk',sans-serif}
   position:absolute;inset:0;z-index:2;
   background:radial-gradient(ellipse at center,transparent 20%,rgba(5,2,20,0.92) 80%);
 }
-/* grid overlay on intro */
 .intro-grid{
   position:absolute;inset:0;z-index:2;pointer-events:none;
   background-image:
@@ -86,7 +84,6 @@ h1,h2,h3,h4,.sg{font-family:'Space Grotesk',sans-serif}
   position:relative;z-index:3;
   text-align:center;display:flex;flex-direction:column;align-items:center;gap:0;
 }
-/* Logo ring animation */
 .logo-ring-wrap{
   position:relative;width:140px;height:140px;
   display:flex;align-items:center;justify-content:center;
@@ -108,12 +105,6 @@ h1,h2,h3,h4,.sg{font-family:'Space Grotesk',sans-serif}
   filter:drop-shadow(0 0 24px rgba(10,54,217,0.9)) drop-shadow(0 0 60px rgba(242,208,59,0.4));
   animation:logoGlow 2.8s ease-in-out infinite alternate;
   position:relative;z-index:2;
-}
-#fallback-logo-text{
-  display:none;font-family:'Space Grotesk',sans-serif;font-size:3.5rem;font-weight:800;
-  background:linear-gradient(135deg,#fff 0%,var(--bg-blue) 50%,var(--highlight) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:none;margin-bottom:8px;letter-spacing:0.1em;
 }
 @keyframes logoGlow{from{filter:drop-shadow(0 0 18px rgba(10,54,217,0.8)) drop-shadow(0 0 40px rgba(242,208,59,0.3))}to{filter:drop-shadow(0 0 38px rgba(10,54,217,1)) drop-shadow(0 0 80px rgba(242,208,59,0.6))}}
 .intro-title{
@@ -240,6 +231,48 @@ nav{
 @keyframes ldot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)}}
 
 /* ============================================================
+   FILTER BAR
+============================================================ */
+.filter-bar{
+  display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap;
+}
+.filter-btn{
+  padding:7px 16px;border-radius:20px;font-size:0.74rem;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.22s;
+  border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);
+  color:var(--text-muted);font-family:'Space Grotesk',sans-serif;
+}
+.filter-btn:hover{border-color:var(--highlight);color:var(--highlight)}
+.filter-btn.active{background:rgba(242,208,59,0.1);border-color:rgba(242,208,59,0.4);color:var(--highlight)}
+.filter-btn.fb-buy{border-color:rgba(91,181,57,0.3);color:var(--positive)}
+.filter-btn.fb-buy.active{background:rgba(91,181,57,0.1);border-color:rgba(91,181,57,0.5)}
+.filter-btn.fb-avoid{border-color:rgba(199,24,36,0.3);color:var(--danger)}
+.filter-btn.fb-avoid.active{background:rgba(199,24,36,0.1);border-color:rgba(199,24,36,0.5)}
+.filter-btn.fb-watch{border-color:rgba(242,208,59,0.3);color:var(--highlight)}
+.filter-btn.fb-watch.active{background:rgba(242,208,59,0.1);border-color:rgba(242,208,59,0.5)}
+
+/* Sort select */
+.sort-select{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text-muted);padding:7px 14px;border-radius:20px;
+  font-size:0.74rem;font-weight:600;cursor:pointer;outline:none;
+  font-family:'Space Grotesk',sans-serif;letter-spacing:1px;text-transform:uppercase;
+  transition:all 0.22s;
+}
+.sort-select:hover,
+.sort-select:focus{border-color:var(--glass-border);color:var(--text-main)}
+.sort-select option{background:var(--bg-dark)}
+
+/* coin count badge */
+.coin-count{
+  margin-left:auto;font-size:0.73rem;color:var(--text-muted);
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  padding:5px 13px;border-radius:20px;
+  font-family:'Space Grotesk',sans-serif;
+}
+.coin-count strong{color:var(--highlight)}
+
+/* ============================================================
    APP CONTAINER
 ============================================================ */
 #app-container{
@@ -346,12 +379,11 @@ nav{
 ============================================================ */
 .dashboard-header{
   display:flex;justify-content:space-between;align-items:flex-end;
-  margin-bottom:28px;flex-wrap:wrap;gap:16px;
+  margin-bottom:20px;flex-wrap:wrap;gap:16px;
 }
-/* Market stats row */
 .market-bar{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
-  margin-bottom:28px;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+  margin-bottom:24px;
 }
 .mbar-item{
   background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);
@@ -360,12 +392,11 @@ nav{
 }
 .mbar-label{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px}
 .mbar-value{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700}
-/* Coin grid */
-.coin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.coin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:18px}
 .coin-card{
   cursor:pointer;transition:all var(--transition);
   background:var(--glass-bg);border:1px solid var(--glass-border);
-  border-radius:var(--radius);padding:22px;
+  border-radius:var(--radius);padding:20px;
   position:relative;overflow:hidden;
 }
 .coin-card::before{
@@ -375,7 +406,7 @@ nav{
 }
 .coin-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(10,54,217,0.3);border-color:rgba(242,208,59,0.3)}
 .coin-card:hover::before{background:linear-gradient(90deg,transparent,rgba(242,208,59,0.4),transparent)}
-.coin-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.coin-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
 .coin-avatar{
   width:42px;height:42px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -383,31 +414,33 @@ nav{
   flex-shrink:0;border:2px solid rgba(255,255,255,0.1);
   box-shadow:0 0 14px rgba(10,54,217,0.35);
 }
-.coin-name-block{}
-.coin-name{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:2px}
-.coin-symbol{font-size:0.78rem;color:var(--text-muted);letter-spacing:1px}
+.coin-name{font-family:'Space Grotesk',sans-serif;font-size:1.02rem;font-weight:700;margin-bottom:2px}
+.coin-symbol{font-size:0.75rem;color:var(--text-muted);letter-spacing:1px}
+.coin-rank{font-size:0.66rem;color:var(--text-muted);background:rgba(255,255,255,0.05);padding:1px 6px;border-radius:4px;margin-right:4px}
 .coin-price{
-  font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;
-  margin:12px 0 4px;
+  font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;
+  margin:10px 0 4px;
 }
-.coin-meta{display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;margin-bottom:14px}
+.coin-meta{display:flex;justify-content:space-between;align-items:center;font-size:0.79rem;margin-bottom:12px}
 .coin-change{font-weight:600}
-/* Reality score bar inline */
-.rs-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.rs-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .rs-track{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden}
 .rs-fill{height:100%;border-radius:3px;transition:width 0.8s ease}
 .rs-label{font-size:0.72rem;color:var(--text-muted);width:62px;text-align:right;flex-shrink:0}
-.mini-chart-box{height:72px;margin-top:12px}
-/* hype row */
+.mini-chart-box{height:68px;margin-top:10px}
 .hype-indicator{
-  display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--text-muted);
-  margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;font-size:0.77rem;color:var(--text-muted);
+  margin-bottom:6px;
 }
 .hype-dots{display:flex;gap:3px}
 .hype-dot{width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,0.1)}
 .hype-dot.on{background:var(--danger)}
 .hype-dot.mid{background:var(--alert)}
 .hype-dot.low{background:var(--positive)}
+.coin-footer-stats{display:flex;gap:14px;font-size:0.72rem;color:var(--text-muted);margin-top:6px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)}
+.cfs-item{display:flex;flex-direction:column;gap:2px}
+.cfs-label{font-size:0.64rem;text-transform:uppercase;letter-spacing:1px}
+.cfs-value{color:var(--text-main);font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:0.78rem}
 
 /* ============================================================
    COIN DETAIL VIEW
@@ -416,7 +449,6 @@ nav{
 .detail-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px}
 .main-chart-box{height:360px;margin-top:18px}
 .detail-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-/* Reality ring */
 .ring-outer{
   position:relative;display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding:24px;
@@ -428,7 +460,6 @@ nav{
 .ring-inner{position:absolute;text-align:center;display:flex;flex-direction:column;align-items:center}
 .ring-val{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;line-height:1}
 .ring-sub{font-size:0.62rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:3px}
-/* decision engine */
 .decision-engine{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:26px;text-align:center;border-radius:var(--radius-sm);
@@ -439,7 +470,6 @@ nav{
 .de-emoji{font-size:2.8rem;margin-bottom:10px}
 .de-label{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:2px}
 .de-conf{font-size:0.78rem;color:var(--text-muted);margin-top:6px}
-/* ai storyteller */
 .ai-story{
   position:relative;padding:20px 20px 20px 28px;
   border-left:3px solid var(--bg-blue);
@@ -453,17 +483,20 @@ nav{
   text-transform:uppercase;color:var(--bg-blue);border-radius:4px;
   border:1px solid rgba(10,54,217,0.4);
 }
-/* smart vs crowd */
 .svc-track{width:100%;background:rgba(255,255,255,0.06);height:9px;border-radius:5px;overflow:hidden;margin-bottom:3px}
 .svc-fill{height:100%;border-radius:5px;transition:width 1s ease}
 .svc-row{margin-bottom:18px}
 .svc-labels{display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:8px;font-weight:500}
-/* fingerprint grid */
 .fp-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:2px;margin-top:8px}
 .fp-cell{aspect-ratio:1;border-radius:2px;transition:opacity 0.4s}
-/* virality dna inline */
 .vdna{display:flex;align-items:flex-end;gap:2px;height:55px;padding:4px 0}
 .vdna-bar{flex:1;border-radius:2px 2px 0 0;min-height:4px}
+
+/* on-chain stats row */
+.onchain-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.oc-box{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:12px 14px;text-align:center}
+.oc-label{font-size:0.64rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+.oc-val{font-family:'Space Grotesk',sans-serif;font-size:0.96rem;font-weight:700}
 
 /* ============================================================
    MANIPULATION LAB
@@ -498,7 +531,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
   line-height:1;margin:10px 0;
   transition:color 0.5s;
 }
-/* replay steps */
 .replay-step{
   display:flex;align-items:flex-start;gap:12px;
   padding:10px 14px;border-radius:var(--radius-sm);
@@ -513,9 +545,8 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
 .rs-desc{font-size:0.78rem;color:var(--text-muted)}
 .rs-time{font-size:0.7rem;color:var(--text-muted);flex-shrink:0;font-family:'Space Grotesk',sans-serif;margin-top:2px}
 .replay-chart-box{height:220px;margin-top:16px}
-/* gravity map */
 .gravity-map{
-  position:relative;width:100%;height:240px;
+  position:relative;width:100%;height:260px;
   overflow:hidden;border-radius:var(--radius-sm);
   background:radial-gradient(ellipse at center,rgba(10,54,217,0.06),transparent 70%);
 }
@@ -537,7 +568,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
 .madness-center{position:absolute;text-align:center}
 .madness-label{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:800}
 .madness-sub{font-size:0.78rem;color:var(--text-muted);margin-top:3px}
-.madness-bars{}
 .mad-row{display:flex;align-items:center;gap:12px;margin-bottom:11px;font-size:0.8rem}
 .mad-lbl{width:120px;color:var(--text-muted);flex-shrink:0}
 .mad-track{flex:1;height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden}
@@ -605,7 +635,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
 @keyframes toastOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
 
 /* ============================================================
-   STATUS BAR (bottom)
+   STATUS BAR
 ============================================================ */
 #status-bar{
   display:none;
@@ -645,7 +675,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
 </head>
 <body>
 
-<!-- BG ORBS -->
 <div class="bg-orbs">
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
@@ -657,12 +686,10 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
   <video id="intro-video" src="intro.mp4" autoplay muted playsinline onerror="this.style.display='none'"></video>
   <div class="intro-overlay"></div>
   <div class="intro-grid"></div>
-
   <div class="intro-content">
     <div class="logo-ring-wrap">
       <div class="logo-ring"></div>
       <div class="logo-ring2"></div>
-      <!-- SVG Logo fallback when logo.png missing -->
       <svg id="intro-logo" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" style="width:90px;height:90px">
         <defs>
           <linearGradient id="ilg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0A36D9"/><stop offset="100%" stop-color="#5BB539"/></linearGradient>
@@ -703,7 +730,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
     </svg>
     <span class="nav-brand-text"><span>CRYPT</span>EXA</span>
   </div>
-
   <div class="nav-center">
     <span class="nav-link active" data-view="dashboard" onclick="CX.navigate('dashboard')">⬡ Dashboard</span>
     <span class="nav-link" data-view="coin-detail" onclick="CX.navigate('coin-detail')" id="nav-coin-detail" style="display:none">◈ Coin Lab</span>
@@ -711,11 +737,10 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
     <span class="nav-link" data-view="insights-lab" onclick="CX.navigate('insights-lab')">✦ Insights Lab</span>
     <span class="nav-link" data-view="time-travel" onclick="CX.navigate('time-travel')">⏳ Time Travel</span>
   </div>
-
   <div class="nav-right">
     <div class="search-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" class="search-bar" placeholder="Search coins…" oninput="CX.filterCoins(this.value)"/>
+      <input type="text" class="search-bar" placeholder="Search coins…" oninput="CX.handleSearch(this.value)"/>
     </div>
     <div class="live-chip"><div class="live-dot"></div>LIVE</div>
   </div>
@@ -730,16 +755,36 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
       <div>
         <div class="section-label">Overview</div>
         <h1 class="page-title">Market Reality Overview</h1>
-        <p class="page-sub">Real-time analysis of price performance vs social hype divergence.</p>
+        <p class="page-sub" style="margin-bottom:0">Real-time analysis of price performance vs social hype divergence across 18 assets.</p>
       </div>
     </div>
 
     <!-- Market bar -->
     <div class="market-bar" id="market-bar">
-      <div class="mbar-item"><div class="mbar-label">Fear &amp; Greed Index</div><div class="mbar-value text-red">74 — Extreme Fear</div></div>
-      <div class="mbar-item"><div class="mbar-label">Total Hype Volume</div><div class="mbar-value text-yellow">$4.7B</div></div>
-      <div class="mbar-item"><div class="mbar-label">Manip. Score (Avg)</div><div class="mbar-value text-orange">63%</div></div>
-      <div class="mbar-item"><div class="mbar-label">Hidden Gems</div><div class="mbar-value text-green">7 Active ↑</div></div>
+      <div class="mbar-item"><div class="mbar-label">Fear &amp; Greed Index</div><div class="mbar-value text-red" id="mb-fg">74 — Greed</div></div>
+      <div class="mbar-item"><div class="mbar-label">Total Market Cap</div><div class="mbar-value text-yellow">$2.41T</div></div>
+      <div class="mbar-item"><div class="mbar-label">Avg Manip. Score</div><div class="mbar-value text-orange" id="mb-manip">—</div></div>
+      <div class="mbar-item"><div class="mbar-label">Hidden Gems</div><div class="mbar-value text-green" id="mb-gems">—</div></div>
+      <div class="mbar-item"><div class="mbar-label">AVOID Signals</div><div class="mbar-value text-red" id="mb-avoid">—</div></div>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="CX.setFilter(this,'all')">All Coins</button>
+      <button class="filter-btn fb-buy" data-filter="BUY" onclick="CX.setFilter(this,'BUY')">🟢 Buy</button>
+      <button class="filter-btn fb-watch" data-filter="WATCH" onclick="CX.setFilter(this,'WATCH')">🟡 Watch</button>
+      <button class="filter-btn fb-avoid" data-filter="AVOID" onclick="CX.setFilter(this,'AVOID')">🔴 Avoid</button>
+      <button class="filter-btn" data-filter="gem" onclick="CX.setFilter(this,'gem')">💎 Gems</button>
+      <button class="filter-btn" data-filter="pump" onclick="CX.setFilter(this,'pump')">⚠ Pumps</button>
+      <button class="filter-btn" data-filter="viral" onclick="CX.setFilter(this,'viral')">🔥 Viral</button>
+      <select class="sort-select" onchange="CX.setSort(this.value)">
+        <option value="rank">Sort: By Rank</option>
+        <option value="realityScore">Sort: Reality Score</option>
+        <option value="hype">Sort: Hype Level</option>
+        <option value="change">Sort: 24H Change</option>
+        <option value="mcapRaw">Sort: Market Cap</option>
+      </select>
+      <div class="coin-count"><strong id="coin-count-num">18</strong> Coins</div>
     </div>
 
     <div class="coin-grid" id="coin-grid"></div>
@@ -751,7 +796,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
       <button class="btn-ghost" onclick="CX.navigate('dashboard')">← Back</button>
       <div class="section-label" style="margin:0">Coin Intelligence Report</div>
     </div>
-
     <div class="detail-grid">
       <!-- LEFT -->
       <div>
@@ -766,23 +810,25 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
             </div>
             <div id="d-decision-badge" class="badge green">BUY</div>
           </div>
-
           <div class="detail-stats">
             <div class="stat-box"><div class="stat-label">Current Price</div><div class="stat-value" id="d-price">$0.00</div></div>
             <div class="stat-box"><div class="stat-label">Hype Intensity</div><div class="stat-value" id="d-hype">0/100</div></div>
             <div class="stat-box"><div class="stat-label">Confidence Score</div><div class="stat-value" id="d-conf">0%</div></div>
             <div class="stat-box"><div class="stat-label">24H Change</div><div class="stat-value" id="d-change">0%</div></div>
           </div>
-
           <div class="section-label">Price vs Hype Divergence</div>
           <div class="main-chart-box"><canvas id="detailChart"></canvas></div>
-
-          <div class="grid-2 mt-16">
-            <div class="stat-box"><div class="stat-label">Market Cap</div><div class="stat-value" id="d-mcap">—</div></div>
-            <div class="stat-box"><div class="stat-label">24H Volume</div><div class="stat-value" id="d-vol">—</div></div>
+          <div class="onchain-row mt-16">
+            <div class="oc-box"><div class="oc-label">Market Cap</div><div class="oc-val" id="d-mcap">—</div></div>
+            <div class="oc-box"><div class="oc-label">24H Volume</div><div class="oc-val" id="d-vol">—</div></div>
+            <div class="oc-box"><div class="oc-label">Circ. Supply</div><div class="oc-val" id="d-supply">—</div></div>
+          </div>
+          <div class="onchain-row mt-8">
+            <div class="oc-box"><div class="oc-label">ATH</div><div class="oc-val" id="d-ath">—</div></div>
+            <div class="oc-box"><div class="oc-label">ATH Distance</div><div class="oc-val" id="d-ath-dist">—</div></div>
+            <div class="oc-box"><div class="oc-label">7D Change</div><div class="oc-val" id="d-7d">—</div></div>
           </div>
         </div>
-
         <!-- AI STORY -->
         <div class="glass-panel">
           <div class="section-label">🤖 Market Storyteller AI</div>
@@ -792,7 +838,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
           </div>
         </div>
       </div>
-
       <!-- RIGHT -->
       <div style="display:flex;flex-direction:column;gap:20px">
         <!-- Reality Score Ring -->
@@ -819,7 +864,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
             <div class="de-conf" id="d-de-conf">Confidence: 92%</div>
           </div>
         </div>
-
         <!-- Smart Money vs Crowd -->
         <div class="glass-panel">
           <div class="section-label">💎 Smart Money vs 👥 Crowd</div>
@@ -839,9 +883,9 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
           <div class="flex gap-12 mt-12 text-xs">
             <span class="text-muted">Wash Trading: <strong id="d-wash" class="text-red">0%</strong></span>
             <span class="text-muted">Spoofing: <strong id="d-spoof" class="text-orange">0%</strong></span>
+            <span class="text-muted">Layering: <strong id="d-layer" class="text-yellow">0%</strong></span>
           </div>
         </div>
-
         <!-- Virality DNA -->
         <div class="glass-panel">
           <div class="section-label">🧬 Virality DNA</div>
@@ -861,13 +905,11 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
     <div class="section-label">Advanced Analysis</div>
     <h1 class="page-title">⚠ Manipulation Lab</h1>
     <p class="page-sub">What-if simulator · Cinematic pump-and-dump replay · Attention gravity mapping</p>
-
     <div class="lab-grid mb-24">
       <!-- SIMULATOR -->
       <div class="glass-panel">
         <div class="section-label" style="margin-bottom:16px">🔮 What-If Simulator</div>
         <p class="text-sm text-muted mb-16">Adjust market variables to model Reality Score outcomes in real-time.</p>
-
         <div class="slider-group">
           <label>Social Hype Intensity<span id="sv-hype">5,000</span></label>
           <input type="range" id="sl-hype" min="1000" max="50000" value="5000" oninput="CX.updateSim()"/>
@@ -884,7 +926,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
           <label>Whale Activity<span id="sv-whale">35 / 100</span></label>
           <input type="range" id="sl-whale" min="0" max="100" value="35" oninput="CX.updateSim()"/>
         </div>
-
         <div class="sim-result">
           <div class="text-xs text-muted" style="letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Simulated Reality Score</div>
           <div class="sim-score-big text-green" id="sim-score">85</div>
@@ -892,12 +933,10 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
           <div class="text-xs text-muted mt-8" id="sim-desc">Strong price action with controlled hype levels.</div>
         </div>
       </div>
-
       <!-- REPLAY -->
       <div class="glass-panel">
         <div class="section-label" style="margin-bottom:8px">🔴 Manipulation Replay Engine</div>
         <p class="text-sm text-muted mb-16">Watch a historical pump-and-dump unfold step by step.</p>
-
         <div id="replay-steps">
           <div class="replay-step" id="rs-0"><span class="rs-ico">🤫</span><div class="rs-text"><div class="rs-title">Stealth Accumulation</div><div class="rs-desc">Whale wallets quietly buy at floor prices</div></div><span class="rs-time">T−14d</span></div>
           <div class="replay-step" id="rs-1"><span class="rs-ico">📱</span><div class="rs-text"><div class="rs-title">Social Seeding</div><div class="rs-desc">50+ Telegram &amp; Twitter bots activate</div></div><span class="rs-time">T−7d</span></div>
@@ -906,17 +945,14 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
           <div class="replay-step" id="rs-4"><span class="rs-ico">💸</span><div class="rs-text"><div class="rs-title">Smart Money Exits</div><div class="rs-desc">Whales dump $18M into retail demand</div></div><span class="rs-time">T+2h</span></div>
           <div class="replay-step" id="rs-5"><span class="rs-ico">💀</span><div class="rs-text"><div class="rs-title">Collapse</div><div class="rs-desc">Price −89% to $0.14. Retail holds bags.</div></div><span class="rs-time">T+8h</span></div>
         </div>
-
         <div style="display:flex;gap:10px;margin-top:14px">
           <button class="btn-danger" onclick="CX.playReplay()" style="flex:1">▶ Play Sequence</button>
           <button class="btn-ghost" onclick="CX.resetReplay()">↺ Reset</button>
         </div>
-
         <div class="replay-chart-box"><canvas id="replayChart"></canvas></div>
         <div id="replay-phase" class="text-xs text-muted mt-8" style="min-height:18px"></div>
       </div>
     </div>
-
     <!-- Gravity Map -->
     <div class="section-label">🌍 Attention Gravity Map</div>
     <div class="glass-panel">
@@ -933,7 +969,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
     <div class="section-label">Deep Intelligence</div>
     <h1 class="page-title">✦ Insights Lab</h1>
     <p class="page-sub">Crowd psychology · Virality mechanics · Market madness forensics</p>
-
     <div class="insights-grid">
       <!-- Madness Gauge -->
       <div class="glass-panel">
@@ -954,7 +989,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
           <div class="mad-row"><span class="mad-lbl">Greed Pulse</span><div class="mad-track"><div class="mad-fill" style="width:79%;background:var(--alert)"></div></div><span class="mad-num">79</span></div>
         </div>
       </div>
-
       <!-- Virality DNA -->
       <div class="glass-panel">
         <div class="section-label" style="margin-bottom:16px">🧬 Virality DNA &amp; Attention Gravity</div>
@@ -962,13 +996,12 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
         <div style="height:270px"><canvas id="viralityChart"></canvas></div>
         <div class="divider"></div>
         <div class="grid-3">
-          <div class="stat-box" style="text-align:center"><div class="stat-label">Twitter</div><div class="stat-value text-yellow">892K</div></div>
-          <div class="stat-box" style="text-align:center"><div class="stat-label">Reddit</div><div class="stat-value text-green">341K</div></div>
-          <div class="stat-box" style="text-align:center"><div class="stat-label">Telegram</div><div class="stat-value text-orange">1.4M</div></div>
+          <div class="stat-box" style="text-align:center"><div class="stat-label">X (Twitter)</div><div class="stat-value text-yellow">2.1M</div></div>
+          <div class="stat-box" style="text-align:center"><div class="stat-label">Reddit</div><div class="stat-value text-green">684K</div></div>
+          <div class="stat-box" style="text-align:center"><div class="stat-label">Telegram</div><div class="stat-value text-orange">3.8M</div></div>
         </div>
       </div>
     </div>
-
     <!-- Radar chart -->
     <div class="glass-panel mt-4">
       <div class="section-label" style="margin-bottom:16px">📊 Multi-Coin Intelligence Matrix</div>
@@ -987,7 +1020,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
     <div class="section-label">Historical Analysis</div>
     <h1 class="page-title">⏳ Time Travel Mode</h1>
     <p class="page-sub">Scan historical hype cycles · Detect manipulation patterns · Validate the Reality Score model</p>
-
     <div class="era-cards" id="era-cards">
       <div class="era-card selected" data-era="2021-bull" onclick="CX.selectEra(this,'2021-bull')">
         <div class="era-year">2021</div>
@@ -1008,7 +1040,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
         <div class="flex gap-8 mt-12"><span class="tag tag-gem">Opportunity</span></div>
       </div>
     </div>
-
     <div class="glass-panel">
       <button class="btn mb-20" onclick="CX.loadTimeTravel()">⚡ Initialize Temporal Scan</button>
       <div class="tt-results" id="tt-results">
@@ -1021,10 +1052,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
 
 </div><!-- #app-container -->
 
-<!-- Alerts container -->
 <div id="alerts-container"></div>
-
-<!-- Status bar -->
 <div id="status-bar">
   <div class="sb-item"><span class="sb-ok">●</span> SYSTEM ONLINE</div>
   <div class="sb-sep"></div>
@@ -1032,43 +1060,193 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
   <div class="sb-sep"></div>
   <div class="sb-item sb-warn">⚡ <span id="sb-alerts">3 LIVE ALERTS</span></div>
   <div class="sb-sep"></div>
+  <div class="sb-item">TRACKING: <span id="sb-coin-count" style="color:var(--highlight);font-weight:600">18 COINS</span></div>
+  <div class="sb-sep"></div>
   <div class="sb-item">CLOCK: <span id="sb-time">--:--:--</span></div>
-  <div style="margin-left:auto"><div class="sb-item"><span class="sb-ok">CRYPTEXA</span> v2.4.1 — Decoding Hype · Revealing Reality</div></div>
+  <div style="margin-left:auto"><div class="sb-item"><span class="sb-ok">CRYPTEXA</span> v3.0.0 — Decoding Hype · Revealing Reality</div></div>
 </div>
 
 <script>
 /* ============================================================
-   MOCK DATA
+   MOCK DATA — 18 COINS WITH REALISTIC MARKET DATA
+   Sources: CoinGecko / CoinMarketCap approximate data
 ============================================================ */
 const COINS = [
-  { id:'btc', symbol:'BTC', name:'Bitcoin', price:64230.50, change:3.1, mcap:'$1.26T', vol:'$38.4B',
-    priceStr:85, hype:42, conf:92, smart:88, fomo:32, wash:4, spoof:6,
-    colors:['#F2D03B','#050214'], type:'gem' },
-  { id:'eth', symbol:'ETH', name:'Ethereum', price:3450.00, change:-1.2, mcap:'$414B', vol:'$18.2B',
-    priceStr:80, hype:50, conf:90, smart:85, fomo:38, wash:7, spoof:9,
-    colors:['#627EEA','#fff'], type:'gem' },
-  { id:'sol', symbol:'SOL', name:'Solana', price:145.20, change:5.8, mcap:'$66.1B', vol:'$5.3B',
-    priceStr:75, hype:78, conf:78, smart:62, fomo:70, wash:18, spoof:22,
-    colors:['#9945FF','#fff'], type:'viral' },
-  { id:'doge', symbol:'DOGE', name:'Dogecoin', price:0.142, change:-2.4, mcap:'$20.4B', vol:'$2.1B',
-    priceStr:32, hype:94, conf:55, smart:12, fomo:97, wash:52, spoof:41,
-    colors:['#C2A633','#050214'], type:'pump' },
-  { id:'pepe', symbol:'PEPE', name:'Pepe', price:0.0000072, change:18.4, mcap:'$3.0B', vol:'$1.8B',
-    priceStr:20, hype:96, conf:48, smart:5, fomo:98, wash:68, spoof:55,
-    colors:['#6DB33F','#fff'], type:'pump' },
-  { id:'wif', symbol:'WIF', name:'Dogwifhat', price:2.45, change:8.2, mcap:'$2.4B', vol:'$890M',
-    priceStr:58, hype:88, conf:62, smart:22, fomo:88, wash:44, spoof:36,
-    colors:['#E8845C','#fff'], type:'viral' },
+  /* ─── Tier 1: Blue Chip ─── */
+  {
+    id:'btc', rank:1, symbol:'BTC', name:'Bitcoin',
+    price:64230.50, change:3.1, change7d:8.4,
+    mcap:'$1.26T', mcapRaw:1260e9, vol:'$38.4B',
+    supply:'19.7M BTC', ath:'$73,750', athDist:'-13%',
+    priceStr:85, hype:42, conf:92, smart:88, fomo:32, wash:4, spoof:6, layer:3,
+    colors:['#F7931A','#050214'], type:'gem',
+    story:'BUY — Bitcoin demonstrates pristine on-chain metrics with realized price well below market price. Institutional inflows via ETFs adding ~$300M/day. Smart money accumulation (88%) vastly outpaces retail FOMO (32%). Hash rate at all-time highs signals miner confidence. Reality Score reflects fundamental strength, not speculative hype.'
+  },
+  {
+    id:'eth', rank:2, symbol:'ETH', name:'Ethereum',
+    price:3448.20, change:-1.2, change7d:5.2,
+    mcap:'$414B', mcapRaw:414e9, vol:'$18.2B',
+    supply:'120.2M ETH', ath:'$4,878', athDist:'-29%',
+    priceStr:80, hype:50, conf:90, smart:85, fomo:38, wash:7, spoof:9, layer:5,
+    colors:['#627EEA','#fff'], type:'gem',
+    story:'BUY — Ethereum post-Dencun upgrade showing strong fee compression benefiting L2 ecosystem. Staking yield steady at 3.8% APR with 32M ETH locked. Whale wallets (>1000 ETH) have been accumulating for 6 consecutive weeks. Hype is moderate and proportional to genuine ecosystem growth. Solid buy for medium-term horizon.'
+  },
+  {
+    id:'bnb', rank:3, symbol:'BNB', name:'BNB',
+    price:582.40, change:1.8, change7d:4.1,
+    mcap:'$84.9B', mcapRaw:84.9e9, vol:'$2.1B',
+    supply:'145.9M BNB', ath:'$686', athDist:'-15%',
+    priceStr:72, hype:48, conf:80, smart:74, fomo:42, wash:14, spoof:11, layer:8,
+    colors:['#F0B90B','#050214'], type:'gem',
+    story:'WATCH — BNB maintains solid utility as BSC ecosystem gas token with regular token burns via Auto-Burn mechanism. Q1 2024 burn reduced supply by 1.99M BNB. However, regulatory uncertainty around Binance exchange creates overhead risk. Smart money positioning is positive but regulatory headlines may suppress upside temporarily.'
+  },
+  {
+    id:'sol', rank:5, symbol:'SOL', name:'Solana',
+    price:145.20, change:5.8, change7d:14.2,
+    mcap:'$66.1B', mcapRaw:66.1e9, vol:'$5.3B',
+    supply:'455.8M SOL', ath:'$259', athDist:'-44%',
+    priceStr:75, hype:78, conf:78, smart:62, fomo:70, wash:18, spoof:22, layer:12,
+    colors:['#9945FF','#fff'], type:'viral',
+    story:'WATCH — Solana is riding a strong narrative wave with memecoin mania on its chain and Firedancer client upgrade on horizon. TVL recovered to $4.8B but hype (78/100) is significantly outpacing price strength (75/100). FOMO index elevated at 70% — suggests some retail-driven speculation. Watch for divergence; a pullback to $120 would represent a stronger entry.'
+  },
+  {
+    id:'xrp', rank:6, symbol:'XRP', name:'XRP',
+    price:0.5240, change:1.8, change7d:3.3,
+    mcap:'$28.5B', mcapRaw:28.5e9, vol:'$1.2B',
+    supply:'54.4B XRP', ath:'$3.40', athDist:'-85%',
+    priceStr:55, hype:62, conf:70, smart:58, fomo:60, wash:16, spoof:18, layer:10,
+    colors:['#00AAE4','#fff'], type:'stable',
+    story:'WATCH — XRP is in a holding pattern as Ripple\'s partial SEC legal victory clarified spot XRP sales aren\'t securities. ODL (On-Demand Liquidity) volume growing in APAC corridors. However, the remaining SEC lawsuit overhang on institutional sales caps upside. Social hype (62) is moderate and driven by genuine legal developments, not manipulation.'
+  },
+  /* ─── Tier 2: Large Cap ─── */
+  {
+    id:'ada', rank:8, symbol:'ADA', name:'Cardano',
+    price:0.4520, change:-0.8, change7d:-2.1,
+    mcap:'$15.9B', mcapRaw:15.9e9, vol:'$420M',
+    supply:'35.2B ADA', ath:'$3.10', athDist:'-85%',
+    priceStr:42, hype:44, conf:68, smart:50, fomo:38, wash:12, spoof:14, layer:7,
+    colors:['#0D1E2D','#3CC8C8'], type:'stable',
+    story:'WATCH — Cardano\'s Chang hard fork (moving to full decentralized governance via Voltaire) is a genuine catalyst that has yet to be priced in. On-chain activity remains modest with 1.3M daily transactions. Price strength underperforms relative to roadmap delivery. Low manipulation signals make this a technical WATCH — patience required for a Vol-era breakout.'
+  },
+  {
+    id:'avax', rank:9, symbol:'AVAX', name:'Avalanche',
+    price:35.20, change:4.2, change7d:10.8,
+    mcap:'$14.5B', mcapRaw:14.5e9, vol:'$680M',
+    supply:'412M AVAX', ath:'$144', athDist:'-76%',
+    priceStr:65, hype:70, conf:74, smart:55, fomo:65, wash:19, spoof:16, layer:11,
+    colors:['#E84142','#fff'], type:'viral',
+    story:'WATCH — Avalanche is gaining traction via institutional subnet adoption (Avalanche9000 upgrade cutting costs 99.9%) and gaming ecosystem growth. Hype (70) is proportionally elevated relative to price strength (65), suggesting partial narrative inflation. Smart money flow is mixed. Good medium-term project but current entry carries 15–20% downside risk.'
+  },
+  {
+    id:'link', rank:13, symbol:'LINK', name:'Chainlink',
+    price:14.52, change:2.9, change7d:7.6,
+    mcap:'$8.5B', mcapRaw:8.5e9, vol:'$520M',
+    supply:'587M LINK', ath:'$52.88', athDist:'-73%',
+    priceStr:68, hype:52, conf:84, smart:78, fomo:36, wash:9, spoof:8, layer:5,
+    colors:['#375BD2','#fff'], type:'gem',
+    story:'BUY — Chainlink is the quiet accumulation play. CCIP (Cross-Chain Interoperability Protocol) now live on 15 chains, enabling $6B+ in cross-chain value transfer. Smart contract integrations up 34% QoQ. Smart money accumulation at 78% is well above FOMO (36%), indicating institutional positioning ahead of a narrative recognition moment. Low manipulation fingerprint confirmed.'
+  },
+  {
+    id:'dot', rank:14, symbol:'DOT', name:'Polkadot',
+    price:7.84, change:-1.5, change7d:-3.4,
+    mcap:'$9.7B', mcapRaw:9.7e9, vol:'$290M',
+    supply:'1.38B DOT', ath:'$55.00', athDist:'-86%',
+    priceStr:40, hype:36, conf:62, smart:52, fomo:28, wash:10, spoof:12, layer:6,
+    colors:['#E6007A','#fff'], type:'stable',
+    story:'WATCH — Polkadot 2.0 agile coretime model is a fundamental improvement over the auction parachain model, but developer migration is slow. 48 active parachains with mixed adoption. Price has underperformed peers in this cycle by 40%+. Smart money (52%) barely edges out FOMO (28%), reflecting uncertainty. Await clear coretime adoption metrics before upgrading signal.'
+  },
+  /* ─── Tier 3: Mid Cap / Trending ─── */
+  {
+    id:'matic', rank:15, symbol:'POL', name:'Polygon',
+    price:0.7240, change:-2.1, change7d:-5.8,
+    mcap:'$6.7B', mcapRaw:6.7e9, vol:'$380M',
+    supply:'9.28B POL', ath:'$2.92', athDist:'-75%',
+    priceStr:48, hype:55, conf:66, smart:55, fomo:52, wash:15, spoof:19, layer:10,
+    colors:['#8247E5','#fff'], type:'stable',
+    story:'WATCH — Polygon\'s POL token migration is complete and AggLayer (aggregated zero-knowledge proof layer) is live with 6 chains connected. However, ETH L2 competition from Arbitrum, Optimism, and Base has intensified. Hype is slightly elevated (55) vs price strength (48), reflecting migration confusion. A technical confluence zone at $0.68 may provide a better entry.'
+  },
+  {
+    id:'arb', rank:16, symbol:'ARB', name:'Arbitrum',
+    price:1.1250, change:-3.4, change7d:-8.2,
+    mcap:'$3.6B', mcapRaw:3.6e9, vol:'$280M',
+    supply:'3.26B ARB', ath:'$2.40', athDist:'-53%',
+    priceStr:52, hype:58, conf:68, smart:60, fomo:55, wash:17, spoof:20, layer:9,
+    colors:['#28A0F0','#050214'], type:'stable',
+    story:'WATCH — Arbitrum is the largest ETH L2 by TVL ($17B) and transaction volume. BOLD upgrade enabling permissionless validators is a significant decentralization milestone. However, ARB token price has lagged the ecosystem\'s TVL growth — a potential divergence opportunity. Hype (58) slightly overshoots price strength (52). Watch for TVL/price reversion in Q3 2024.'
+  },
+  {
+    id:'inj', rank:24, symbol:'INJ', name:'Injective',
+    price:28.50, change:6.7, change7d:18.4,
+    mcap:'$2.4B', mcapRaw:2.4e9, vol:'$380M',
+    supply:'84.5M INJ', ath:'$52.63', athDist:'-46%',
+    priceStr:70, hype:72, conf:80, smart:68, fomo:62, wash:16, spoof:14, layer:8,
+    colors:['#0082FA','#fff'], type:'gem',
+    story:'BUY — Injective is emerging as the premier DeFi-native L1 with $1.4B TVL and the fastest-growing perp DEX ecosystem. Weekly burn rate of INJ tokens creates strong deflationary pressure. Smart money (68%) leads FOMO (62%), indicating informed accumulation. The hype/price balance is healthy. Watch for $35 reclaim as next key resistance.'
+  },
+  {
+    id:'tia', rank:28, symbol:'TIA', name:'Celestia',
+    price:8.92, change:12.3, change7d:24.7,
+    mcap:'$1.8B', mcapRaw:1.8e9, vol:'$450M',
+    supply:'201.5M TIA', ath:'$20.40', athDist:'-56%',
+    priceStr:62, hype:82, conf:72, smart:52, fomo:78, wash:22, spoof:28, layer:14,
+    colors:['#7B2FBE','#fff'], type:'viral',
+    story:'WATCH — Celestia\'s modular data availability narrative is genuinely innovative and attracting developer attention (50+ rollups integrating). However, hype (82) is materially outrunning price strength (62) — a classic viral divergence pattern. FOMO index at 78% suggests significant retail participation. Strong underlying tech but current price action demands patience for a lower risk entry.'
+  },
+  /* ─── Tier 4: Memecoins / High Risk ─── */
+  {
+    id:'doge', rank:10, symbol:'DOGE', name:'Dogecoin',
+    price:0.1420, change:-2.4, change7d:-1.8,
+    mcap:'$20.4B', mcapRaw:20.4e9, vol:'$2.1B',
+    supply:'143.9B DOGE', ath:'$0.7376', athDist:'-81%',
+    priceStr:32, hype:94, conf:55, smart:12, fomo:97, wash:52, spoof:41, layer:28,
+    colors:['#C2A633','#050214'], type:'pump',
+    story:'AVOID — Dogecoin\'s Reality Score is suppressed by extreme hype-to-fundamentals divergence. Hype index (94) driven almost entirely by social media sentiment cycles and Elon Musk tweet patterns rather than utility growth. Smart money (12%) is at near-record lows — whales are distributing. Wash trading at 52% confirms artificial volume inflation. Exit liquidity risk is very high.'
+  },
+  {
+    id:'shib', rank:12, symbol:'SHIB', name:'Shiba Inu',
+    price:0.00002485, change:8.5, change7d:22.4,
+    mcap:'$14.6B', mcapRaw:14.6e9, vol:'$890M',
+    supply:'589.3T SHIB', ath:'$0.00008845', athDist:'-72%',
+    priceStr:24, hype:92, conf:42, smart:8, fomo:96, wash:64, spoof:52, layer:38,
+    colors:['#FF0000','#FFB81C'], type:'pump',
+    story:'AVOID — SHIB exhibits the most severe manipulation fingerprint in our dataset. Wash trading at 64% and FOMO index at 96% create a dangerous liquidity trap. Shibarium L2 has shown limited adoption (avg 280K daily TXs vs 15M+ target). Smart money is at critically low levels (8%). The recent 8.5% pump shows classic stop-hunt characteristics. Strong AVOID.'
+  },
+  {
+    id:'pepe', rank:20, symbol:'PEPE', name:'Pepe',
+    price:0.000007250, change:18.4, change7d:42.8,
+    mcap:'$3.0B', mcapRaw:3.0e9, vol:'$1.8B',
+    supply:'420.69T PEPE', ath:'$0.00001716', athDist:'-58%',
+    priceStr:20, hype:96, conf:48, smart:5, fomo:98, wash:68, spoof:55, layer:44,
+    colors:['#00B140','#fff'], type:'pump',
+    story:'AVOID — PEPE is in an active pump phase with 18.4% 24H gain and 42.8% weekly move. Classic pump-and-dump mechanics detected: wash trading 68%, spoofing 55%, smart money at 5% vs 98% FOMO. The social virality is genuine but value extraction risk is extreme. Historically, PEPE pumps of this magnitude retrace 65-80% within 5-14 days. This is exit liquidity territory.'
+  },
+  {
+    id:'wif', rank:31, symbol:'WIF', name:'Dogwifhat',
+    price:2.4520, change:8.2, change7d:19.6,
+    mcap:'$2.4B', mcapRaw:2.4e9, vol:'$890M',
+    supply:'998.9M WIF', ath:'$4.83', athDist:'-49%',
+    priceStr:58, hype:88, conf:62, smart:22, fomo:88, wash:44, spoof:36, layer:24,
+    colors:['#FF6B35','#fff'], type:'viral',
+    story:'WATCH — WIF has become the leading SOL memecoin with genuine CEX adoption (listed on Binance, Coinbase, Bybit). The 49% ATH distance gives room to run but hype (88) significantly outpaces intrinsic price strength (58). Smart money (22%) is low — this is largely retail-driven. While viral momentum can extend irrational moves, the risk/reward is poor at current levels. Wait for consolidation.'
+  },
+  {
+    id:'floki', rank:44, symbol:'FLOKI', name:'Floki',
+    price:0.0001952, change:22.4, change7d:58.3,
+    mcap:'$1.8B', mcapRaw:1.8e9, vol:'$560M',
+    supply:'9.63T FLOKI', ath:'$0.0003403', athDist:'-43%',
+    priceStr:18, hype:98, conf:38, smart:4, fomo:99, wash:72, spoof:61, layer:48,
+    colors:['#E94400','#FFC940'], type:'pump',
+    story:'AVOID — CRITICAL ALERT: Floki is exhibiting maximum manipulation signals across all vectors. Hype at 98/100 with a 22.4% 24H pump and 58% weekly gain screams coordinated pump activity. Smart money (4%) near zero. Wash trading at 72% is among the highest in our dataset. FLOKI MANIA marketing campaign detected across 12 Asian markets simultaneously. Dump imminent based on historical pattern matching.'
+  },
 ];
 
-// Computed fields
+// ── Computed fields ──
 function rnd(a,b){return Math.random()*(b-a)+a}
 COINS.forEach(c=>{
   const raw = 50 + (c.priceStr - c.hype)/2;
   c.realityScore = Math.max(0,Math.min(100,Math.round(raw)));
-  c.decision = c.realityScore>50&&c.conf>70?'BUY':c.realityScore>=30?'WATCH':'AVOID';
+  c.decision = c.realityScore>55&&c.conf>72?'BUY':c.realityScore>=32?'WATCH':'AVOID';
   c.statusClass = c.decision==='BUY'?'green':c.decision==='WATCH'?'yellow':'red';
-  // Generate sparkline history
   c.hist = [];
   let v=c.price;
   for(let i=0;i<30;i++){v*=(1+(rnd(-0.06,0.06)));c.hist.push(v);}
@@ -1095,6 +1273,13 @@ const CHART_DEFAULTS = {
 };
 
 /* ============================================================
+   APP STATE
+============================================================ */
+let activeFilter = 'all';
+let activeSort = 'rank';
+let searchQuery = '';
+
+/* ============================================================
    MAIN APP
 ============================================================ */
 const CX = {
@@ -1106,14 +1291,13 @@ const CX = {
 
   /* ── INTRO ── */
   init(){
-    setTimeout(()=>{
-      if(document.getElementById('intro-page').style.opacity!=='0') CX.enterApp();
-    }, 5200);
+    setTimeout(()=>{ CX.enterApp(); }, 5200);
     document.getElementById('intro-video').addEventListener('ended', CX.enterApp);
   },
 
   enterApp(){
     const intro = document.getElementById('intro-page');
+    if(intro.style.opacity==='0') return;
     intro.style.opacity = '0';
     setTimeout(()=>{
       intro.style.display='none';
@@ -1125,6 +1309,7 @@ const CX = {
       CX.updateSim();
       CX.buildGravity('gravMap');
       CX.startLive();
+      CX.updateMarketBar();
     },1200);
   },
 
@@ -1140,19 +1325,70 @@ const CX = {
     if(viewId==='dashboard') CX.renderDashboard();
   },
 
-  /* ── DASHBOARD ── */
-  filterCoins(q){
-    const filtered = COINS.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())||c.symbol.toLowerCase().includes(q.toLowerCase()));
-    CX.renderDashboard(filtered);
+  /* ── MARKET BAR ── */
+  updateMarketBar(){
+    const avgManip = Math.round(COINS.reduce((s,c)=>(s+c.wash+c.spoof)/2,0)/COINS.length);
+    const gems = COINS.filter(c=>c.decision==='BUY').length;
+    const avoids = COINS.filter(c=>c.decision==='AVOID').length;
+    const mb = document.getElementById('mb-manip'); if(mb) mb.textContent=avgManip+'%';
+    const mbg = document.getElementById('mb-gems'); if(mbg) mbg.textContent=gems+' Active ↑';
+    const mba = document.getElementById('mb-avoid'); if(mba) mba.textContent=avoids+' Coins ↓';
   },
 
-  renderDashboard(coins=COINS){
+  /* ── FILTER / SORT ── */
+  setFilter(el, f){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    activeFilter=f;
+    CX.renderDashboard();
+  },
+
+  setSort(s){
+    activeSort=s;
+    CX.renderDashboard();
+  },
+
+  handleSearch(q){
+    searchQuery=q;
+    CX.renderDashboard();
+  },
+
+  getFilteredSorted(){
+    let list=[...COINS];
+    // search
+    if(searchQuery){
+      const q=searchQuery.toLowerCase();
+      list=list.filter(c=>c.name.toLowerCase().includes(q)||c.symbol.toLowerCase().includes(q));
+    }
+    // filter
+    if(activeFilter!=='all'){
+      if(['BUY','WATCH','AVOID'].includes(activeFilter)){
+        list=list.filter(c=>c.decision===activeFilter);
+      } else {
+        list=list.filter(c=>c.type===activeFilter);
+      }
+    }
+    // sort
+    list.sort((a,b)=>{
+      if(activeSort==='rank') return a.rank-b.rank;
+      if(activeSort==='realityScore') return b.realityScore-a.realityScore;
+      if(activeSort==='hype') return b.hype-a.hype;
+      if(activeSort==='change') return b.change-a.change;
+      if(activeSort==='mcapRaw') return b.mcapRaw-a.mcapRaw;
+      return 0;
+    });
+    return list;
+  },
+
+  /* ── DASHBOARD ── */
+  renderDashboard(){
+    const coins = CX.getFilteredSorted();
+    document.getElementById('coin-count-num').textContent=coins.length;
     const grid = document.getElementById('coin-grid');
     grid.innerHTML='';
     coins.forEach(c=>{
       const up = c.change>=0;
       const decLabel = c.decision==='BUY'?'🟢 BUY':c.decision==='WATCH'?'🟡 WATCH':'🔴 AVOID';
-      // hype dots
       const dotCount=10;
       let dots='';
       for(let i=0;i<dotCount;i++){
@@ -1160,7 +1396,10 @@ const CX = {
         const cls=i/dotCount<pct?(c.hype>70?'on':c.hype>45?'mid':'low'):'';
         dots+=`<div class="hype-dot ${cls}"></div>`;
       }
-
+      const typeTag = c.type==='pump'?'<span class="tag tag-pump">PUMP RISK</span>':
+                      c.type==='gem'?'<span class="tag tag-gem">GEM</span>':
+                      c.type==='viral'?'<span class="tag tag-viral">VIRAL</span>':
+                      '<span class="tag tag-stable">STABLE</span>';
       const card=document.createElement('div');
       card.className='coin-card';
       card.onclick=()=>CX.openCoin(c.id);
@@ -1168,14 +1407,17 @@ const CX = {
         <div class="coin-card-header">
           <div class="flex gap-12">
             <div class="coin-avatar" style="background:${c.colors[0]};color:${c.colors[1]}">${c.symbol.slice(0,2)}</div>
-            <div><div class="coin-name">${c.name}</div><div class="coin-symbol">${c.symbol}</div></div>
+            <div>
+              <div class="coin-name"><span class="coin-rank">#${c.rank}</span>${c.name}</div>
+              <div class="coin-symbol">${c.symbol}</div>
+            </div>
           </div>
           <span class="badge ${c.statusClass}">${decLabel}</span>
         </div>
-        <div class="coin-price">$${c.price>=1?c.price.toLocaleString(undefined,{minimumFractionDigits:2}):c.price}</div>
+        <div class="coin-price">${CX.fmtPrice(c.price)}</div>
         <div class="coin-meta">
-          <span class="${up?'up':'dn'}" style="font-weight:600">${up?'▲':'▼'} ${Math.abs(c.change)}%</span>
-          <span class="text-xs text-muted">${c.type==='pump'?'<span class="tag tag-pump">PUMP</span>':c.type==='gem'?'<span class="tag tag-gem">GEM</span>':c.type==='viral'?'<span class="tag tag-viral">VIRAL</span>':''}</span>
+          <span class="${up?'up':'dn'}" style="font-weight:600">${up?'▲':'▼'} ${Math.abs(c.change).toFixed(1)}%</span>
+          ${typeTag}
         </div>
         <div class="rs-row">
           <div class="text-xs text-muted" style="width:90px">Reality Score</div>
@@ -1188,11 +1430,23 @@ const CX = {
           <span>Hype ${c.hype}/100</span>
           <div class="hype-dots">${dots}</div>
         </div>
+        <div class="coin-footer-stats">
+          <div class="cfs-item"><div class="cfs-label">Mkt Cap</div><div class="cfs-value">${c.mcap}</div></div>
+          <div class="cfs-item"><div class="cfs-label">Volume</div><div class="cfs-value">${c.vol}</div></div>
+          <div class="cfs-item"><div class="cfs-label">7D</div><div class="cfs-value ${c.change7d>=0?'up':'dn'}">${c.change7d>=0?'▲':'▼'}${Math.abs(c.change7d).toFixed(1)}%</div></div>
+        </div>
         <div class="mini-chart-box"><canvas id="mc-${c.id}"></canvas></div>
       `;
       grid.appendChild(card);
       setTimeout(()=>CX.buildMini(c),30);
     });
+  },
+
+  fmtPrice(p){
+    if(p>=1000) return '$'+p.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(p>=1) return '$'+p.toFixed(4);
+    if(p>=0.001) return '$'+p.toFixed(6);
+    return '$'+p.toFixed(8);
   },
 
   buildMini(c){
@@ -1213,26 +1467,26 @@ const CX = {
     if(!c)return;
     CX.currentCoin=c;
     const up=c.change>=0;
-
-    // Nav
     const cdLink=document.getElementById('nav-coin-detail');
     cdLink.style.display='inline-flex';
     cdLink.textContent=`◈ ${c.symbol}`;
     CX.navigate('coin-detail');
 
-    // Avatar
     const av=document.getElementById('d-avatar');
     av.style.background=c.colors[0];av.style.color=c.colors[1];av.textContent=c.symbol.slice(0,2);
     document.getElementById('d-name').textContent=c.name;
-    document.getElementById('d-symbol-tag').innerHTML=`<span class="text-muted mono">${c.symbol}</span><span class="tag ${c.type==='pump'?'tag-pump':c.type==='gem'?'tag-gem':'tag-viral'}">${c.type.toUpperCase()}</span>`;
-
-    // Stats
-    document.getElementById('d-price').textContent=`$${c.price>=1?c.price.toLocaleString(undefined,{minimumFractionDigits:2}):c.price}`;
+    document.getElementById('d-symbol-tag').innerHTML=`<span class="text-muted mono">${c.symbol} · #${c.rank}</span><span class="tag ${c.type==='pump'?'tag-pump':c.type==='gem'?'tag-gem':c.type==='viral'?'tag-viral':'tag-stable'}">${c.type.toUpperCase()}</span>`;
+    document.getElementById('d-price').textContent=CX.fmtPrice(c.price);
     document.getElementById('d-hype').textContent=`${c.hype}/100`;
     document.getElementById('d-conf').textContent=`${c.conf}%`;
-    document.getElementById('d-change').innerHTML=`<span class="${up?'up':'dn'}">${up?'▲':'▼'} ${Math.abs(c.change)}%</span>`;
+    document.getElementById('d-change').innerHTML=`<span class="${up?'up':'dn'}">${up?'▲':'▼'} ${Math.abs(c.change).toFixed(1)}%</span>`;
     document.getElementById('d-mcap').textContent=c.mcap;
     document.getElementById('d-vol').textContent=c.vol;
+    document.getElementById('d-supply').textContent=c.supply;
+    document.getElementById('d-ath').textContent=c.ath;
+    document.getElementById('d-ath-dist').innerHTML=`<span class="dn">${c.athDist}</span>`;
+    const chg7 = c.change7d>=0;
+    document.getElementById('d-7d').innerHTML=`<span class="${chg7?'up':'dn'}">${chg7?'▲':'▼'} ${Math.abs(c.change7d).toFixed(1)}%</span>`;
 
     // Reality Ring
     const r=64,circ=2*Math.PI*r;
@@ -1241,7 +1495,7 @@ const CX = {
     const arc=document.getElementById('ring-arc');
     const col=c.statusClass==='green'?'#5BB539':c.statusClass==='red'?'#C71824':'#F2D03B';
     arc.style.stroke=col;
-    arc.style.strokeDashoffset=circ; // reset then animate
+    arc.style.strokeDashoffset=circ;
     arc.style.filter=`drop-shadow(0 0 9px ${col})`;
     document.getElementById('d-reality-val').textContent=c.realityScore;
     document.getElementById('d-reality-val').style.color=col;
@@ -1252,7 +1506,6 @@ const CX = {
     const deLabel=document.getElementById('d-de-label');
     const deConf=document.getElementById('d-de-conf');
     const deEmoji=de.querySelector('.de-emoji');
-    de.className=`decision-engine mt-8 ${c.statusClass==='green'?'de-buy':c.statusClass==='red'?'de-avoid':'de-watch'}`;
     if(c.statusClass==='green'){de.style.background='rgba(91,181,57,0.08)';de.style.border='1px solid rgba(91,181,57,0.25)';de.querySelector('.de-pulse').style.background='radial-gradient(ellipse at center,rgba(91,181,57,0.1),transparent 70%)';}
     else if(c.statusClass==='red'){de.style.background='rgba(199,24,36,0.08)';de.style.border='1px solid rgba(199,24,36,0.25)';de.querySelector('.de-pulse').style.background='radial-gradient(ellipse at center,rgba(199,24,36,0.1),transparent 70%)';}
     else{de.style.background='rgba(242,208,59,0.07)';de.style.border='1px solid rgba(242,208,59,0.25)';de.querySelector('.de-pulse').style.background='radial-gradient(ellipse at center,rgba(242,208,59,0.08),transparent 70%)';}
@@ -1261,31 +1514,30 @@ const CX = {
     deLabel.style.color=col;
     deConf.textContent=`Confidence: ${c.conf}%`;
 
-    // Badge
     const badge=document.getElementById('d-decision-badge');
     badge.className=`badge ${c.statusClass}`;
     badge.textContent=c.decision;
 
-    // Smart/FOMO
     document.getElementById('d-smart-val').textContent=c.smart+'%';
     document.getElementById('d-smart-bar').style.width=c.smart+'%';
     document.getElementById('d-fomo-val').textContent=c.fomo+'%';
     document.getElementById('d-fomo-bar').style.width=c.fomo+'%';
 
-    // Fingerprint
     CX.buildFP('d-fp-grid',c.wash,14,5);
     document.getElementById('d-wash').textContent=c.wash+'%';
     document.getElementById('d-spoof').textContent=c.spoof+'%';
+    document.getElementById('d-layer').textContent=c.layer+'%';
 
-    // Virality DNA
     CX.buildDNA('d-vdna',c);
 
-    // Story
-    let story='';
-    if(c.decision==='AVOID') story=`⚠ Warning: ${c.name} exhibits classic manipulation fingerprints. Social hype (${c.hype}/100) vastly outpaces price strength (${c.priceStr}/100). Smart money is exiting (${c.smart}% accumulation) while retail FOMO is dangerously high (${c.fomo}%). Wash trading accounts for ${c.wash}% of volume. High probability of a sharp correction within 48-72 hours.`;
-    else if(c.decision==='BUY') story=`✦ Opportunity Detected: ${c.name} shows strong fundamental price action (${c.priceStr}/100) with relatively controlled hype (${c.hype}/100). Smart money accumulation is robust (${c.smart}%), signaling institutional confidence. This pattern historically precedes a significant price discovery phase before retail awareness peaks.`;
-    else story=`⏸ Observation: ${c.name} is in an equilibrium state. Hype and price action are moving in tandem. Smart money flow is mixed (${c.smart}% accumulation). Awaiting a divergence signal — either a breakout or hype spike — to determine the next directional move.`;
-    document.getElementById('d-story').textContent=story;
+    // Virality tag
+    const vtag=document.getElementById('d-virality-tag');
+    if(c.hype>80){vtag.textContent='EXPLOSIVE';vtag.className='tag tag-pump';}
+    else if(c.hype>60){vtag.textContent='HIGH';vtag.className='tag tag-viral';}
+    else if(c.hype>40){vtag.textContent='MODERATE';vtag.className='tag tag-stable';}
+    else{vtag.textContent='LOW';vtag.className='tag tag-gem';}
+
+    document.getElementById('d-story').textContent=c.story||'Analysis loading…';
 
     // Detail Chart
     setTimeout(()=>{
@@ -1293,7 +1545,7 @@ const CX = {
       if(CX.charts.detail) CX.charts.detail.destroy();
       const L=Array.from({length:30},(_,i)=>`D${i+1}`);
       const priceN=c.hist.map(p=>(p/c.price)*50+20);
-      const hyp=Array.from({length:30},()=>Math.floor(rnd(c.hype-15,c.hype+15)));
+      const hyp=Array.from({length:30},()=>Math.floor(rnd(c.hype-12,c.hype+12)));
       CX.charts.detail=new Chart(ctx,{
         type:'line',
         data:{labels:L,datasets:[
@@ -1348,32 +1600,26 @@ const CX = {
     const vol=+parseFloat(document.getElementById('sl-vol').value).toFixed(1);
     const priceStr=+document.getElementById('sl-price').value;
     const whale=+document.getElementById('sl-whale').value;
-
     document.getElementById('sv-hype').textContent=hype.toLocaleString();
     document.getElementById('sv-vol').textContent=`$${vol}B`;
     document.getElementById('sv-price').textContent=`${priceStr} / 100`;
     document.getElementById('sv-whale').textContent=`${whale} / 100`;
-
     const hypeNorm=(hype/50000)*100;
     let score=50+(priceStr-hypeNorm)/2+(whale*0.12);
     if(vol<1.0&&hypeNorm>70) score-=22;
     score=Math.max(0,Math.min(100,Math.round(score)));
-
     const el=document.getElementById('sim-score');
     const badge=document.getElementById('sim-badge');
     const desc=document.getElementById('sim-desc');
     el.textContent=score;
     if(score>60){
-      el.style.color='var(--positive)';
-      badge.className='badge green';badge.innerHTML='🟢 BUY SIGNAL';
+      el.style.color='var(--positive)';badge.className='badge green';badge.innerHTML='🟢 BUY SIGNAL';
       desc.textContent='Strong price action with controlled hype. Smart money patterns detected.';
     }else if(score>=35){
-      el.style.color='var(--highlight)';
-      badge.className='badge yellow';badge.innerHTML='🟡 WATCH — UNSTABLE';
+      el.style.color='var(--highlight)';badge.className='badge yellow';badge.innerHTML='🟡 WATCH — UNSTABLE';
       desc.textContent='Mixed signals. Hype and fundamentals in tension. Monitor closely.';
     }else{
-      el.style.color='var(--danger)';
-      badge.className='badge red';badge.innerHTML='🔴 AVOID — MANIPULATION DETECTED';
+      el.style.color='var(--danger)';badge.className='badge red';badge.innerHTML='🔴 AVOID — MANIPULATION DETECTED';
       desc.textContent='Extreme hype divergence from price strength. Exit liquidity risk is high.';
     }
   },
@@ -1395,10 +1641,7 @@ const CX = {
       options:{
         ...CHART_DEFAULTS,
         plugins:{legend:{display:true,labels:{color:'rgba(255,255,255,0.7)',usePointStyle:true,font:{family:'Space Grotesk',size:11}}},tooltip:{...CHART_DEFAULTS.plugins.tooltip}},
-        scales:{
-          x:{...CHART_DEFAULTS.scales.x},
-          y:{...CHART_DEFAULTS.scales.y,min:0,max:100},
-        },
+        scales:{x:{...CHART_DEFAULTS.scales.x},y:{...CHART_DEFAULTS.scales.y,min:0,max:100}},
         animation:{duration:0},
       }
     });
@@ -1431,7 +1674,6 @@ const CX = {
     let step=0;
     const steps=document.querySelectorAll('.replay-step');
     const stepMap=[0,1,2,3,3,3,4,5,5,5];
-
     CX.replayTimer=setInterval(()=>{
       if(step>=hFull.length){clearInterval(CX.replayTimer);return;}
       hData.push(hFull[step]);pData.push(pFull[step]);
@@ -1454,15 +1696,20 @@ const CX = {
     const el=document.getElementById(id);
     if(!el)return;
     const nodes=[
-      {n:'BTC',sz:84,c:'#F2D03B',x:18,y:14},
-      {n:'ETH',sz:66,c:'#627EEA',x:62,y:18},
-      {n:'PEPE',sz:52,c:'#C71824',x:12,y:60},
-      {n:'VIREX',sz:58,c:'#F2851D',x:44,y:68},
-      {n:'HELION',sz:40,c:'#5BB539',x:76,y:62},
-      {n:'STABLE',sz:36,c:'#7eb3ff',x:84,y:36},
-      {n:'SOL',sz:46,c:'#9945FF',x:40,y:32},
-      {n:'DOGE',sz:38,c:'#C2A633',x:62,y:82},
-      {n:'WIF',sz:32,c:'#E8845C',x:26,y:82},
+      {n:'BTC',sz:88,c:'#F7931A',x:18,y:16},
+      {n:'ETH',sz:70,c:'#627EEA',x:60,y:14},
+      {n:'BNB',sz:54,c:'#F0B90B',x:84,y:28},
+      {n:'SOL',sz:50,c:'#9945FF',x:42,y:34},
+      {n:'XRP',sz:46,c:'#00AAE4',x:76,y:56},
+      {n:'PEPE',sz:48,c:'#00B140',x:14,y:60},
+      {n:'SHIB',sz:44,c:'#FF0000',x:32,y:72},
+      {n:'FLOKI',sz:38,c:'#E94400',x:58,y:76},
+      {n:'WIF',sz:36,c:'#FF6B35',x:74,y:84},
+      {n:'DOGE',sz:42,c:'#C2A633',x:8,y:82},
+      {n:'INJ',sz:34,c:'#0082FA',x:88,y:68},
+      {n:'TIA',sz:32,c:'#7B2FBE',x:50,y:56},
+      {n:'LINK',sz:34,c:'#375BD2',x:28,y:44},
+      {n:'AVAX',sz:38,c:'#E84142',x:48,y:20},
     ];
     el.innerHTML=nodes.map((n,i)=>{
       const jx=rnd(-3,3),jy=rnd(-3,3);
@@ -1482,8 +1729,8 @@ const CX = {
 
   /* ── INSIGHTS CHARTS ── */
   initInsightsCharts(){
-    // Madness doughnut
     setTimeout(()=>{
+      // Madness doughnut
       const ctx=document.getElementById('madnessChart');
       if(!ctx)return;
       if(CX.charts.madness) CX.charts.madness.destroy();
@@ -1500,17 +1747,17 @@ const CX = {
       // Virality bubble
       const ctx2=document.getElementById('viralityChart');
       if(CX.charts.virality) CX.charts.virality.destroy();
-      const bd=Array.from({length:22},()=>({x:rnd(5,95),y:rnd(5,95),r:rnd(4,22)}));
+      const bd=Array.from({length:28},()=>({x:rnd(5,95),y:rnd(5,95),r:rnd(4,22)}));
       CX.charts.virality=new Chart(ctx2.getContext('2d'),{
         type:'bubble',
         data:{datasets:[
-          {label:'Hype Nodes',data:bd.slice(0,12),backgroundColor:'rgba(242,208,59,0.55)',borderColor:'#F2D03B',borderWidth:1},
-          {label:'Organic Nodes',data:bd.slice(12),backgroundColor:'rgba(10,54,217,0.55)',borderColor:'#0A36D9',borderWidth:1},
+          {label:'Hype Nodes',data:bd.slice(0,15),backgroundColor:'rgba(242,208,59,0.55)',borderColor:'#F2D03B',borderWidth:1},
+          {label:'Organic Nodes',data:bd.slice(15),backgroundColor:'rgba(10,54,217,0.55)',borderColor:'#0A36D9',borderWidth:1},
         ]},
         options:{responsive:true,maintainAspectRatio:false,scales:{x:{display:false},y:{display:false}},plugins:{legend:{display:true,labels:{color:'rgba(255,255,255,0.65)',font:{size:11,family:'Space Grotesk'},usePointStyle:true}}}},
       });
 
-      // Radar
+      // Radar — top 3 coins by reality score vs bottom pump
       const ctx3=document.getElementById('radarChart');
       if(CX.charts.radar) CX.charts.radar.destroy();
       CX.charts.radar=new Chart(ctx3.getContext('2d'),{
@@ -1518,9 +1765,10 @@ const CX = {
         data:{
           labels:['Reality Score','Confidence','Price Strength','Smart Money','Low Hype','Safety'],
           datasets:[
-            {label:'BTC',data:[85,92,85,88,58,90],borderColor:'#F2D03B',backgroundColor:'rgba(242,208,59,0.1)',borderWidth:2,pointBackgroundColor:'#F2D03B',pointRadius:4},
-            {label:'DOGE',data:[29,55,32,12,6,18],borderColor:'#C71824',backgroundColor:'rgba(199,24,36,0.1)',borderWidth:2,pointBackgroundColor:'#C71824',pointRadius:4},
+            {label:'BTC',data:[85,92,85,88,58,90],borderColor:'#F7931A',backgroundColor:'rgba(247,147,26,0.1)',borderWidth:2,pointBackgroundColor:'#F7931A',pointRadius:4},
             {label:'ETH',data:[80,90,80,85,50,85],borderColor:'#627EEA',backgroundColor:'rgba(98,126,234,0.1)',borderWidth:2,pointBackgroundColor:'#627EEA',pointRadius:4},
+            {label:'LINK',data:[82,84,68,78,48,82],borderColor:'#375BD2',backgroundColor:'rgba(55,91,210,0.08)',borderWidth:2,pointBackgroundColor:'#375BD2',pointRadius:4},
+            {label:'FLOKI',data:[1,38,18,4,2,6],borderColor:'#E94400',backgroundColor:'rgba(233,68,0,0.1)',borderWidth:2,pointBackgroundColor:'#E94400',pointRadius:4},
           ]
         },
         options:{responsive:true,maintainAspectRatio:false,
@@ -1529,17 +1777,17 @@ const CX = {
         },
       });
 
-      // Rankings
+      // Rankings — all 18
       const rl=document.getElementById('rank-list');
       if(rl){
         const sorted=[...COINS].sort((a,b)=>b.realityScore-a.realityScore);
         rl.innerHTML=sorted.map((c,i)=>`
-          <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer" onclick="CX.openCoin('${c.id}')">
-            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--text-muted);width:20px">${i+1}</div>
-            <div class="coin-avatar" style="width:32px;height:32px;font-size:0.65rem;background:${c.colors[0]};color:${c.colors[1]};flex-shrink:0">${c.symbol.slice(0,2)}</div>
-            <div style="flex:1"><div style="font-weight:600;font-size:0.88rem">${c.name}</div><div style="font-size:0.72rem;color:var(--text-muted)">${c.symbol}</div></div>
-            <span class="badge ${c.statusClass}" style="font-size:0.65rem;padding:3px 9px">${c.decision}</span>
-            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;color:${c.statusClass==='green'?'var(--positive)':c.statusClass==='red'?'var(--danger)':'var(--highlight)'}">${c.realityScore}</div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer" onclick="CX.openCoin('${c.id}')">
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--text-muted);width:20px;font-size:0.82rem">${i+1}</div>
+            <div class="coin-avatar" style="width:30px;height:30px;font-size:0.62rem;background:${c.colors[0]};color:${c.colors[1]};flex-shrink:0">${c.symbol.slice(0,2)}</div>
+            <div style="flex:1"><div style="font-weight:600;font-size:0.84rem">${c.name}</div><div style="font-size:0.68rem;color:var(--text-muted)">${c.symbol}</div></div>
+            <span class="badge ${c.statusClass}" style="font-size:0.62rem;padding:2px 8px">${c.decision}</span>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.88rem;color:${c.statusClass==='green'?'var(--positive)':c.statusClass==='red'?'var(--danger)':'var(--highlight)'};min-width:28px;text-align:right">${c.realityScore}</div>
           </div>`).join('');
       }
     },120);
@@ -1558,31 +1806,28 @@ const CX = {
     const story=document.getElementById('tt-story');
     results.style.display='block';
     results.style.animation='viewIn 0.4s ease forwards';
-
     const eras={
       '2021-bull':{
         labels:['Sep','Oct','Nov','Dec','Jan','Feb'],
         price:[32,42,62,69,47,38],
         hype:[38,54,75,100,92,62],
-        text:`Late 2021 Bull Run: Hype reached 100/100 exactly as Bitcoin peaked at $69K. The Reality Score collapsed to 12 — a screaming AVOID signal. 97% of retail investors who bought at peak suffered 70%+ losses over the following 12 months. Smart money had been quietly exiting since October when the Hype/Price divergence first exceeded 30 points.`
+        text:`Late 2021 Bull Run: Hype reached 100/100 exactly as Bitcoin peaked at $69K in November 2021. The Reality Score collapsed to 12 — a screaming AVOID signal. 97% of retail investors who bought at peak suffered 70%+ losses over the following 12 months. Smart money had been quietly exiting since October when the Hype/Price divergence first exceeded 30 points. The Fear & Greed Index hit 84 (Extreme Greed) — our model's most reliable contrarian AVOID trigger.`
       },
       '2022-crash':{
         labels:['Feb','Mar','Apr','May','Jun','Jul'],
         price:[38,42,30,12,4,0.5],
         hype:[35,38,32,95,88,28],
-        text:`2022 Terra/Luna Contagion: A classic "inverse divergence" event. When Luna collapsed, panic mentions spiked to 95 while price fell to near zero in 72 hours. The manipulation fingerprint was clear three weeks before collapse — algorithmic minting was accelerating at an unsustainable rate. Cryptexa's model flagged an AVOID signal at $32 per LUNA.`
+        text:`2022 Terra/Luna Contagion: A classic "inverse divergence" event. When Do Kwon's algorithmic stablecoin UST depegged on May 9-10, 2022, LUNA went from $85 to near-zero in 72 hours — erasing $40B in market cap. Panic mentions spiked to 95/100 while price collapsed. Cryptexa's manipulation fingerprint flagged LUNA 3 weeks before collapse — algorithmic minting was accelerating at 40% weekly with no organic demand. The AVOID signal came at $32 per LUNA.`
       },
       '2024-etf':{
         labels:['Oct','Nov','Dec','Jan','Feb','Mar'],
         price:[27,35,42,48,60,72],
         hype:[28,40,58,95,72,55],
-        text:`2024 Bitcoin ETF Approval: A textbook "buy the rumor, sell the news" — but price held. Hype peaked exactly on approval day (Jan 10) at 95/100, yet Price Strength remained at 78/100. The Reality Score held at 62, sustaining a BUY/WATCH signal. Retail FOMO was high but smart money accumulation matched it — a rare synchronized signal that produced a $72K price within 60 days.`
+        text:`2024 Bitcoin Spot ETF Approval: A textbook "buy the rumor, sell the news" — but price held. Hype peaked exactly on approval day (January 10, 2024) at 95/100 as 11 spot ETFs received SEC approval, yet Price Strength held at 78/100. The Reality Score held above 60, sustaining a BUY/WATCH signal. BlackRock's IBIT, Fidelity's FBTC, and ARK's ARKB pulled $4.6B in first-week inflows — a genuine institutional demand signal. Price hit $73,750 ATH within 60 days.`
       }
     };
-
     const d=eras[era];
     story.textContent=d.text;
-
     setTimeout(()=>{
       const ctx=document.getElementById('ttChart');
       if(CX.charts.tt) CX.charts.tt.destroy();
@@ -1602,7 +1847,7 @@ const CX = {
 
   /* ── LIVE UPDATES ── */
   startLive(){
-    setInterval(CX.tickPrices, 2800);
+    setInterval(CX.tickPrices, 3200);
     setInterval(CX.randomAlert, 14000);
     setInterval(()=>{
       const el=document.getElementById('sb-time');
@@ -1612,26 +1857,31 @@ const CX = {
 
   tickPrices(){
     COINS.forEach(c=>{
-      const drift=c.type==='stable'?0.0005:0.018;
+      const drift=c.type==='stable'?0.008:c.type==='pump'?0.025:0.015;
       c.price*=(1+rnd(-drift,drift));
-      c.hype=Math.max(0,Math.min(100,c.hype+rnd(-1.5,1.5)));
+      c.hype=Math.max(0,Math.min(100,c.hype+rnd(-1.2,1.2)));
       const raw=50+(c.priceStr-c.hype)/2;
       c.realityScore=Math.max(0,Math.min(100,Math.round(raw)));
-      c.decision=c.realityScore>50&&c.conf>70?'BUY':c.realityScore>=30?'WATCH':'AVOID';
+      c.decision=c.realityScore>55&&c.conf>72?'BUY':c.realityScore>=32?'WATCH':'AVOID';
       c.statusClass=c.decision==='BUY'?'green':c.decision==='WATCH'?'yellow':'red';
     });
-    // Re-render dashboard if active
+    CX.updateMarketBar();
     const dash=document.getElementById('dashboard');
     if(dash&&dash.classList.contains('active')) CX.renderDashboard();
   },
 
   randomAlert(){
     const alerts=[
-      {coin:'PEPE',msg:'Anomalous social volume detected. Reality Score dropping to 18.',type:'danger'},
-      {coin:'BTC',msg:'Smart money accumulation signal upgraded. Confidence: 94%.',type:'positive'},
-      {coin:'DOGE',msg:'Hype spike +400% detected. Wash trading confirmed at 68%.',type:'warn'},
-      {coin:'SOL',msg:'Hidden gem pattern emerging. Price strength outpacing hype.',type:'positive'},
-      {coin:'WIF',msg:'Manipulation fingerprint matched. Pump-and-dump risk: HIGH.',type:'danger'},
+      {coin:'FLOKI',msg:'Maximum manipulation score reached. Smart money at 4%. Pump imminent or dump in progress.',type:'danger'},
+      {coin:'BTC',msg:'ETF net inflow +$312M today. Smart money accumulation upgraded to 90%. Strong BUY reinforced.',type:'positive'},
+      {coin:'PEPE',msg:'Hype spike +400% in 2 hours. Wash trading confirmed at 68%. Exit liquidity trap forming.',type:'danger'},
+      {coin:'LINK',msg:'CCIP integration: 15th chain confirmed. Hidden gem signal strengthening. Confidence now 86%.',type:'positive'},
+      {coin:'SHIB',msg:'Shibarium daily TXs collapsed 40%. Reality Score dropped to 18. Full AVOID signal active.',type:'danger'},
+      {coin:'SOL',msg:'Firedancer validator client testnet live. TVL up 12% this week. Watch signal holding firm.',type:'warn'},
+      {coin:'WIF',msg:'Manipulation fingerprint matched: stop-hunt pattern detected at $2.20. Watch entry levels.',type:'warn'},
+      {coin:'INJ',msg:'Weekly token burn at 3-month high. Price action outpacing hype — BUY signal confirmed.',type:'positive'},
+      {coin:'DOGE',msg:'No Elon tweet activity for 72H. Hype deflating. FOMO retreating from 97 to 88.',type:'warn'},
+      {coin:'TIA',msg:'New rollup integration: EigenDA competitor. Hype elevated but developer signal genuine.',type:'warn'},
     ];
     const a=alerts[Math.floor(Math.random()*alerts.length)];
     const bar={danger:['var(--danger)','🚨'],positive:['var(--positive)','✦'],warn:['var(--alert)','⚡']}[a.type];
