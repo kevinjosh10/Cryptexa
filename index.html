@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptexa | Decoding Hype, Revealing Reality</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #050214;
+            --bg-purple: #200E73;
+            --bg-blue: #0A36D9;
+            --positive: #5BB539;
+            --danger: #C71824;
+            --alert: #F2851D;
+            --highlight: #F2D03B;
+            --text-main: #FFFFFF;
+            --text-muted: #A0AEC0;
+            --glass-bg: rgba(32, 14, 115, 0.25);
+            --glass-border: rgba(10, 54, 217, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(32, 14, 115, 0.4), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(10, 54, 217, 0.3), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* --- Intro Page --- */
+        #intro-page {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #intro-video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        #intro-logo {
+            max-width: 300px;
+            filter: drop-shadow(0 0 20px var(--bg-blue));
+            animation: pulse-glow 2s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--highlight);
+            text-shadow: 0 0 10px rgba(242, 208, 59, 0.5);
+            opacity: 0;
+            animation: fade-in 2s forwards 1s;
+        }
+
+        .skip-btn {
+            margin-top: 40px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            opacity: 0;
+            animation: fade-in 2s forwards 2s;
+        }
+        .skip-btn:hover {
+            border-color: var(--highlight);
+            color: var(--highlight);
+        }
+
+        /* --- Navbar --- */
+        nav {
+            display: none; /* Hidden during intro */
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 40px;
+            background: rgba(5, 2, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-shadow: 0 0 10px var(--bg-blue);
+            cursor: pointer;
+        }
+
+        .nav-brand img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s, text-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--highlight);
+            text-shadow: 0 0 8px var(--highlight);
+        }
+
+        /* --- Main App Container --- */
+        #app-container {
+            display: none;
+            padding: 100px 40px 40px;
+            min-height: 100vh;
+        }
+
+        .view {
+            display: none;
+            animation: fade-in 0.5s forwards;
+        }
+        .view.active {
+            display: block;
+        }
+
+        /* --- UI Components --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .badge.green { background: rgba(91, 181, 57, 0.2); color: var(--positive); border: 1px solid var(--positive); }
+        .badge.red { background: rgba(199, 24, 36, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+        .badge.yellow { background: rgba(242, 208, 59, 0.2); color: var(--highlight); border: 1px solid var(--highlight); }
+
+        .btn {
+            background: var(--bg-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+        .btn:hover {
+            box-shadow: 0 0 15px var(--bg-blue);
+            transform: translateY(-2px);
+        }
+
+        /* --- Dashboard --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .search-bar {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 12px 20px;
+            border-radius: 30px;
+            color: white;
+            width: 300px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-bar:focus {
+            border-color: var(--highlight);
+        }
+
+        .coin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .coin-card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .coin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(10, 54, 217, 0.4);
+            border-color: var(--highlight);
+        }
+
+        .coin-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .coin-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .mini-chart-container {
+            height: 80px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        /* --- Coin Detail --- */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .main-chart-container {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+        .stat-value { font-size: 1.2rem; font-weight: 700; margin-top: 5px; font-family: 'Space Grotesk', sans-serif;}
+
+        .ai-storyteller {
+            border-left: 4px solid var(--bg-blue);
+            padding-left: 15px;
+            margin-top: 20px;
+            font-style: italic;
+            color: #E2E8F0;
+            line-height: 1.6;
+        }
+
+        /* --- Manipulation Lab --- */
+        .lab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .slider-group {
+            margin-bottom: 25px;
+        }
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--highlight);
+        }
+        input[type=range] {
+            width: 100%;
+            accent-color: var(--bg-blue);
+        }
+
+        /* --- Alerts --- */
+        #alerts-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .alert-toast {
+            background: rgba(20, 10, 40, 0.95);
+            border-left: 4px solid var(--alert);
+            padding: 15px 20px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            color: white;
+            min-width: 300px;
+            animation: slide-in-right 0.3s forwards;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- Animations --- */
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse-glow { from { filter: drop-shadow(0 0 10px var(--bg-blue)); } to { filter: drop-shadow(0 0 30px var(--highlight)); } }
+        @keyframes slide-in-right { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slide-out-right { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- Intro Sequence -->
+    <div id="intro-page">
+        <!-- Fallback to a dark gradient if video fails/missing -->
+        <video id="intro-video" src="intro.mp4" autoplay muted playsinline onerror="this.style.display='none'"></video>
+        <div class="intro-content">
+            <!-- Fallback text if logo image is missing -->
+            <img id="intro-logo" src="logo.png" alt="Cryptexa Logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='block';">
+            <h1 id="fallback-logo" style="display:none; font-size: 4rem; color: var(--highlight); text-shadow: 0 0 20px var(--highlight); margin-bottom: 20px;">CRYPTEXA</h1>
+            <h2 class="tagline">Decoding Hype, Revealing Reality</h2>
+            <button class="skip-btn" onclick="app.enterApp()">Enter Platform</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-brand" onclick="app.navigate('dashboard')">
+            <span style="color: var(--highlight);">CRYPT</span>EXA
+        </div>
+        <div class="nav-links">
+            <a onclick="app.navigate('dashboard')" id="nav-dashboard" class="active">Dashboard</a>
+            <a onclick="app.navigate('manipulation-lab')" id="nav-manipulation-lab">Manipulation Lab</a>
+            <a onclick="app.navigate('insights-lab')" id="nav-insights-lab">Insights Lab</a>
+            <a onclick="app.navigate('time-travel')" id="nav-time-travel">Time Travel</a>
+        </div>
+    </nav>
+
+    <!-- Main Application Container -->
+    <div id="app-container">
+        
+        <!-- 1. Dashboard View -->
+        <div id="dashboard" class="view active">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="font-display" style="font-size: 2.5rem; margin-bottom: 10px;">Market Reality Overview</h1>
+                    <p style="color: var(--text-muted);">Real-time analysis of price performance vs social hype.</p>
+                </div>
+                <input type="text" class="search-bar" placeholder="Search coins (e.g., DOGE, BTC)..." onkeyup="app.filterCoins(this.value)">
+            </div>
+            <div class="coin-grid" id="coin-grid-container">
+                <!-- Coin cards injected via JS -->
+            </div>
+        </div>
+
+        <!-- 2. Coin Detail View -->
+        <div id="coin-detail" class="view">
+            <button class="btn" style="margin-bottom: 20px; background: transparent; border: 1px solid var(--glass-border);" onclick="app.navigate('dashboard')">← Back to Dashboard</button>
+            
+            <div class="detail-grid">
+                <!-- Left Col: Charts -->
+                <div class="glass-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 id="detail-coin-name" class="font-display" style="font-size: 2rem;">Coin Name</h2>
+                        <span id="detail-decision-badge" class="badge">Buy</span>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Reality Score</div>
+                            <div class="stat-value" id="detail-reality-score" style="color: var(--highlight);">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Confidence Score</div>
+                            <div class="stat-value" id="detail-confidence">0%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Current Price</div>
+                            <div class="stat-value" id="detail-price">$0.00</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Hype Intensity</div>
+                            <div class="stat-value" id="detail-hype">0/100</div>
+                        </div>
+                    </div>
+
+                    <h3 class="font-display" style="margin-top: 30px; margin-bottom: 15px;">Price vs Hype Divergence</h3>
+                    <div class="main-chart-container">
+                        <canvas id="detailMainChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Right Col: AI & Insights -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="glass-panel">
+                        <h3 class="font-display" style="margin-bottom: 15px; color: var(--highlight);">Market Storyteller AI</h3>
+                        <p id="detail-ai-text" class="ai-storyteller">Analyzing market conditions...</p>
+                    </div>
+
+                    <div class="glass-panel">
+                        <h3 class="font-display" style="margin-bottom: 15px;">Smart Money vs Crowd</h3>
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                                <span>Smart Money Accumulation</span>
+                                <span id="smart-money-val">75%</span>
+                            </div>
+                            <div style="width: 100%; background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px;">
+                                <div id="smart-money-bar" style="width: 75%; background: var(--positive); height: 100%; border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                                <span>Crowd FOMO Index</span>
+                                <span id="crowd-fomo-val">82%</span>
+                            </div>
+                            <div style="width: 100%; background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px;">
+                                <div id="crowd-fomo-bar" style="width: 82%; background: var(--danger); height: 100%; border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Manipulation Lab View -->
+        <div id="manipulation-lab" class="view">
+            <h1 class="font-display" style="font-size: 2.5rem; margin-bottom: 10px;">Manipulation Lab</h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Interactive What-If Simulator & Pump-and-Dump Replay.</p>
+
+            <div class="lab-grid">
+                <div class="glass-panel">
+                    <h2 class="font-display" style="margin-bottom: 20px; color: var(--highlight);">What-If Simulator</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Adjust variables to see how artificial hype impacts the Reality Score and Decision Engine.</p>
+                    
+                    <div class="slider-group">
+                        <label>Social Mentions (Hype) <span id="sim-hype-val">5000</span></label>
+                        <input type="range" id="sim-hype" min="1000" max="50000" value="5000" oninput="app.updateSimulator()">
+                    </div>
+                    <div class="slider-group">
+                        <label>Trading Volume <span id="sim-vol-val">$1.2B</span></label>
+                        <input type="range" id="sim-vol" min="0.1" max="10" step="0.1" value="1.2" oninput="app.updateSimulator()">
+                    </div>
+                    <div class="slider-group">
+                        <label>Price Action Strength <span id="sim-price-val">60/100</span></label>
+                        <input type="range" id="sim-price" min="10" max="100" value="60" oninput="app.updateSimulator()">
+                    </div>
+
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 8px; border: 1px dashed var(--glass-border);">
+                        <h3 style="text-align: center; margin-bottom: 10px;">Simulated Reality Score</h3>
+                        <div id="sim-reality-score" style="font-size: 3rem; font-weight: 700; text-align: center; color: var(--positive); font-family: 'Space Grotesk', sans-serif;">85</div>
+                        <div id="sim-decision" class="badge green" style="display: block; width: fit-content; margin: 10px auto 0;">BUY SIGNAL</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel">
+                    <h2 class="font-display" style="margin-bottom: 20px;">Cinematic Replay: The "Squid" Crash</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Watch a historical manipulation fingerprint unfold in real-time.</p>
+                    
+                    <div style="height: 250px; width: 100%; margin-bottom: 20px;">
+                        <canvas id="replayChart"></canvas>
+                    </div>
+                    
+                    <button class="btn" onclick="app.playReplay()" style="width: 100%;">▶ Play Manipulation Sequence</button>
+                    <p id="replay-narrative" class="ai-storyteller" style="display: none; margin-top: 15px;">Initiating sequence...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Insights Lab View -->
+        <div id="insights-lab" class="view">
+            <h1 class="font-display" style="font-size: 2.5rem; margin-bottom: 10px;">Insights Lab</h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Deep dive into crowd psychology and virality mechanics.</p>
+
+            <div class="lab-grid">
+                <div class="glass-panel">
+                    <h2 class="font-display" style="margin-bottom: 20px;">Crowd Madness Index</h2>
+                    <div style="position: relative; height: 300px; display: flex; align-items: center; justify-content: center;">
+                        <canvas id="madnessChart"></canvas>
+                        <div style="position: absolute; text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--danger);">EXTREME</div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted);">FOMO Detected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel">
+                    <h2 class="font-display" style="margin-bottom: 20px;">Virality DNA & Attention Gravity</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Visualizing how attention clusters around specific narratives.</p>
+                    <div style="height: 300px; width: 100%;">
+                        <canvas id="viralityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Time Travel View -->
+        <div id="time-travel" class="view">
+            <h1 class="font-display" style="font-size: 2.5rem; margin-bottom: 10px;">Time Travel</h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Analyze historical divergence between price and hype.</p>
+
+            <div class="glass-panel" style="text-align: center; padding: 60px 20px;">
+                <h2 class="font-display" style="color: var(--highlight); margin-bottom: 20px;">Select Historical Era</h2>
+                <select id="era-select" style="padding: 10px 20px; background: var(--bg-dark); color: white; border: 1px solid var(--glass-border); border-radius: 6px; font-size: 1.1rem; margin-bottom: 30px;">
+                    <option value="2021-bull">2021 Bull Run Peak</option>
+                    <option value="2022-crash">2022 Terra/Luna Contagion</option>
+                    <option value="2024-etf">2024 ETF Approval Hype</option>
+                </select>
+                <br>
+                <button class="btn" onclick="app.loadTimeTravel()">Initialize Temporal Scan</button>
+                
+                <div id="time-travel-results" style="display: none; margin-top: 40px; text-align: left;">
+                    <div style="height: 300px; width: 100%;">
+                        <canvas id="timeTravelChart"></canvas>
+                    </div>
+                    <p class="ai-storyteller" id="tt-story">Scanning...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Alerts Container -->
+    <div id="alerts-container"></div>
+
+    <!-- Application Logic -->
+    <script>
+        // --- Mock Data ---
+        const MOCK_COINS = [
+            { id: 'btc', symbol: 'BTC', name: 'Bitcoin', price: 64230.50, priceStrength: 85, hypeIntensity: 60, confidence: 92, smartMoney: 88, crowdFomo: 40 },
+            { id: 'doge', symbol: 'DOGE', name: 'Dogecoin', price: 0.14, priceStrength: 40, hypeIntensity: 95, confidence: 85, smartMoney: 15, crowdFomo: 98 },
+            { id: 'sol', symbol: 'SOL', name: 'Solana', price: 145.20, priceStrength: 75, hypeIntensity: 80, confidence: 78, smartMoney: 65, crowdFomo: 70 },
+            { id: 'pepe', symbol: 'PEPE', name: 'Pepe', price: 0.000007, priceStrength: 20, hypeIntensity: 88, confidence: 60, smartMoney: 5, crowdFomo: 92 },
+            { id: 'eth', symbol: 'ETH', name: 'Ethereum', price: 3450.00, priceStrength: 80, hypeIntensity: 50, confidence: 90, smartMoney: 85, crowdFomo: 35 },
+            { id: 'wif', symbol: 'WIF', name: 'Dogwifhat', price: 2.45, priceStrength: 55, hypeIntensity: 90, confidence: 65, smartMoney: 20, crowdFomo: 85 }
+        ];
+
+        // Generate historical trend data for charts
+        function generateTrendData(basePrice, volatility, length = 30) {
+            let prices = [];
+            let hypes = [];
+            let currentPrice = basePrice;
+            for(let i=0; i<length; i++) {
+                currentPrice = currentPrice * (1 + (Math.random() * volatility - (volatility/2)));
+                prices.push(currentPrice);
+                hypes.push(Math.floor(Math.random() * 100));
+            }
+            return { prices, hypes };
+        }
+
+        MOCK_COINS.forEach(coin => {
+            coin.history = generateTrendData(coin.price, 0.1);
+            // Calculate Reality Score: 100 - absolute difference, or Price Strength - Hype + 50 normalized
+            // Logic: Reality Score = Price Strength - Hype Intensity. 
+            // Let's map it to 0-100. If Price=80, Hype=20 -> Score = 80 - 20 = 60. (Good)
+            // If Price=20, Hype=90 -> Score = 20 - 90 = -70. Let's normalize to 0-100 scale for UI.
+            // Let's use: Reality Score = 50 + (Price Strength - Hype Intensity) / 2.
+            let rawScore = 50 + (coin.priceStrength - coin.hypeIntensity) / 2;
+            coin.realityScore = Math.max(0, Math.min(100, Math.round(rawScore)));
+            
+            // Decision Engine
+            if (coin.realityScore > 50 && coin.confidence > 70) {
+                coin.decision = 'BUY';
+                coin.statusClass = 'green';
+            } else if (coin.realityScore >= 30 && coin.realityScore <= 50) {
+                coin.decision = 'WATCH';
+                coin.statusClass = 'yellow';
+            } else {
+                coin.decision = 'AVOID';
+                coin.statusClass = 'red';
+            }
+        });
+
+        // --- Core App Logic ---
+        const app = {
+            charts: {},
+            currentCoin: null,
+
+            init() {
+                // Intro sequence timeout fallback
+                setTimeout(() => {
+                    if(document.getElementById('intro-page').style.display !== 'none') {
+                        app.enterApp();
+                    }
+                }, 6000);
+
+                // Start random alerts
+                setInterval(app.triggerRandomAlert, 15000);
+            },
+
+            enterApp() {
+                const intro = document.getElementById('intro-page');
+                intro.style.opacity = '0';
+                setTimeout(() => {
+                    intro.style.display = 'none';
+                    document.getElementById('navbar').style.display = 'flex';
+                    document.getElementById('app-container').style.display = 'block';
+                    app.renderDashboard();
+                    app.initInsightsCharts();
+                }, 1000);
+            },
+
+            navigate(viewId) {
+                // Update Nav
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                const navLink = document.getElementById(`nav-${viewId}`);
+                if(navLink) navLink.classList.add('active');
+
+                // Update Views
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                document.getElementById(viewId).classList.add('active');
+
+                if(viewId === 'dashboard') app.renderDashboard();
+                if(viewId === 'manipulation-lab') app.updateSimulator();
+            },
+
+            filterCoins(query) {
+                const q = query.toLowerCase();
+                const filtered = MOCK_COINS.filter(c => c.name.toLowerCase().includes(q) || c.symbol.toLowerCase().includes(q));
+                app.renderDashboard(filtered);
+            },
+
+            renderDashboard(coins = MOCK_COINS) {
+                const container = document.getElementById('coin-grid-container');
+                container.innerHTML = '';
+
+                coins.forEach(coin => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-panel coin-card';
+                    card.onclick = () => app.openCoinDetail(coin.id);
+                    
+                    card.innerHTML = `
+                        <div class="coin-card-header">
+                            <div>
+                                <h3 style="font-size: 1.2rem;">${coin.name} <span style="color: var(--text-muted); font-size: 0.9rem;">${coin.symbol}</span></h3>
+                            </div>
+                            <span class="badge ${coin.statusClass}">${coin.decision}</span>
+                        </div>
+                        <div class="coin-price">$${coin.price >= 1 ? coin.price.toLocaleString(undefined, {minimumFractionDigits: 2}) : coin.price}</div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>Reality Score: <strong style="color: white;">${coin.realityScore}</strong></span>
+                            <span>Hype: <strong style="color: white;">${coin.hypeIntensity}</strong></span>
+                        </div>
+                        <div class="mini-chart-container">
+                            <canvas id="mini-chart-${coin.id}"></canvas>
+                        </div>
+                    `;
+                    container.appendChild(card);
+
+                    // Render Mini Chart
+                    setTimeout(() => {
+                        const ctx = document.getElementById(`mini-chart-${coin.id}`).getContext('2d');
+                        if(app.charts[`mini-${coin.id}`]) app.charts[`mini-${coin.id}`].destroy();
+                        
+                        app.charts[`mini-${coin.id}`] = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: Array.from({length: 30}, (_, i) => i),
+                                datasets: [{
+                                    data: coin.history.prices,
+                                    borderColor: coin.statusClass === 'green' ? '#5BB539' : (coin.statusClass === 'red' ? '#C71824' : '#F2D03B'),
+                                    borderWidth: 2,
+                                    tension: 0.4,
+                                    pointRadius: 0
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                                scales: { x: { display: false }, y: { display: false } }
+                            }
+                        });
+                    }, 50);
+                });
+            },
+
+            openCoinDetail(coinId) {
+                const coin = MOCK_COINS.find(c => c.id === coinId);
+                app.currentCoin = coin;
+
+                document.getElementById('detail-coin-name').innerText = `${coin.name} (${coin.symbol})`;
+                
+                const badge = document.getElementById('detail-decision-badge');
+                badge.className = `badge ${coin.statusClass}`;
+                badge.innerText = coin.decision;
+
+                document.getElementById('detail-reality-score').innerText = coin.realityScore;
+                document.getElementById('detail-reality-score').style.color = coin.statusClass === 'green' ? 'var(--positive)' : (coin.statusClass === 'red' ? 'var(--danger)' : 'var(--highlight)');
+                
+                document.getElementById('detail-confidence').innerText = `${coin.confidence}%`;
+                document.getElementById('detail-price').innerText = `$${coin.price >= 1 ? coin.price.toLocaleString(undefined, {minimumFractionDigits: 2}) : coin.price}`;
+                document.getElementById('detail-hype').innerText = `${coin.hypeIntensity}/100`;
+
+                document.getElementById('smart-money-val').innerText = `${coin.smartMoney}%`;
+                document.getElementById('smart-money-bar').style.width = `${coin.smartMoney}%`;
+                
+                document.getElementById('crowd-fomo-val').innerText = `${coin.crowdFomo}%`;
+                document.getElementById('crowd-fomo-bar').style.width = `${coin.crowdFomo}%`;
+
+                // AI Storyteller logic
+                let story = "";
+                if(coin.decision === 'AVOID') {
+                    story = `Warning: ${coin.name} exhibits classic manipulation fingerprints. Social hype (${coin.hypeIntensity}/100) vastly outpaces actual price strength (${coin.priceStrength}/100). Smart money is exiting (${coin.smartMoney}% accumulation) while retail FOMO is dangerously high (${coin.crowdFomo}%). High probability of a sharp correction.`;
+                } else if (coin.decision === 'BUY') {
+                    story = `Opportunity Detected: ${coin.name} shows strong fundamental price action (${coin.priceStrength}/100) with relatively low retail hype (${coin.hypeIntensity}/100). Smart money accumulation is strong (${coin.smartMoney}%), indicating institutional confidence before retail awareness peaks.`;
+                } else {
+                    story = `Observation: ${coin.name} is currently in an equilibrium state. Hype and price action are moving in tandem. Awaiting a divergence signal to determine the next major move.`;
+                }
+                document.getElementById('detail-ai-text').innerText = story;
+
+                app.navigate('coin-detail');
+
+                // Render Main Chart
+                setTimeout(() => {
+                    const ctx = document.getElementById('detailMainChart').getContext('2d');
+                    if(app.charts['mainDetail']) app.charts['mainDetail'].destroy();
+
+                    app.charts['mainDetail'] = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({length: 30}, (_, i) => `Day ${i+1}`),
+                            datasets: [
+                                {
+                                    label: 'Price Strength',
+                                    data: coin.history.prices.map(p => (p / coin.price) * 50 + 20), // Normalized for visual comparison
+                                    borderColor: '#5BB539',
+                                    backgroundColor: 'rgba(91, 181, 57, 0.1)',
+                                    borderWidth: 2,
+                                    tension: 0.4,
+                                    fill: true,
+                                    yAxisID: 'y'
+                                },
+                                {
+                                    label: 'Hype Intensity',
+                                    data: coin.history.hypes,
+                                    borderColor: '#C71824',
+                                    borderDash: [5, 5],
+                                    borderWidth: 2,
+                                    tension: 0.4,
+                                    yAxisID: 'y1'
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: { mode: 'index', intersect: false },
+                            scales: {
+                                x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#A0AEC0' } },
+                                y: { type: 'linear', display: true, position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#5BB539' } },
+                                y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#C71824' } }
+                            },
+                            plugins: {
+                                legend: { labels: { color: '#FFF' } }
+                            }
+                        }
+                    });
+                }, 100);
+            },
+
+            // --- Manipulation Lab Logic ---
+            updateSimulator() {
+                const hype = parseInt(document.getElementById('sim-hype').value);
+                const vol = parseFloat(document.getElementById('sim-vol').value);
+                const priceStrength = parseInt(document.getElementById('sim-price').value);
+
+                document.getElementById('sim-hype-val').innerText = hype.toLocaleString();
+                document.getElementById('sim-vol-val').innerText = `$${vol.toFixed(1)}B`;
+                document.getElementById('sim-price-val').innerText = `${priceStrength}/100`;
+
+                // Calculate simulated Reality Score
+                // Map hype (1000-50000) to 0-100 scale
+                const hypeIntensity = (hype / 50000) * 100;
+                let rawScore = 50 + (priceStrength - hypeIntensity) / 2;
+                // Add volume multiplier effect
+                if(vol < 1.0 && hypeIntensity > 70) rawScore -= 20; // Low vol + high hype = bad
+                
+                const realityScore = Math.max(0, Math.min(100, Math.round(rawScore)));
+                
+                const scoreEl = document.getElementById('sim-reality-score');
+                const badgeEl = document.getElementById('sim-decision');
+                
+                scoreEl.innerText = realityScore;
+
+                if (realityScore > 50) {
+                    scoreEl.style.color = 'var(--positive)';
+                    badgeEl.className = 'badge green';
+                    badgeEl.innerText = 'BUY SIGNAL';
+                } else if (realityScore >= 30) {
+                    scoreEl.style.color = 'var(--highlight)';
+                    badgeEl.className = 'badge yellow';
+                    badgeEl.innerText = 'WATCH (UNSTABLE)';
+                } else {
+                    scoreEl.style.color = 'var(--danger)';
+                    badgeEl.className = 'badge red';
+                    badgeEl.innerText = 'AVOID (MANIPULATION DETECTED)';
+                }
+            },
+
+            playReplay() {
+                const narrative = document.getElementById('replay-narrative');
+                narrative.style.display = 'block';
+                narrative.innerText = "Phase 1: Artificial Hype Injection. Bot networks activate on social media.";
+                
+                const ctx = document.getElementById('replayChart').getContext('2d');
+                if(app.charts['replay']) app.charts['replay'].destroy();
+
+                let hypeData = [10, 12, 15, 80, 95, 100, 90, 40, 20, 10];
+                let priceData = [10, 11, 12, 15, 40, 85, 90, 20, 5, 2];
+                
+                let currentStep = 0;
+
+                app.charts['replay'] = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['T-9', 'T-8', 'T-7', 'T-6', 'T-5', 'T-4', 'T-3', 'T-2', 'T-1', 'T-0'],
+                        datasets: [
+                            { label: 'Hype', data: [], borderColor: '#C71824', borderWidth: 2, tension: 0.4 },
+                            { label: 'Price', data: [], borderColor: '#5BB539', borderWidth: 2, tension: 0.4 }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        animation: { duration: 0 },
+                        scales: { y: { max: 100, min: 0 } }
+                    }
+                });
+
+                const interval = setInterval(() => {
+                    if(currentStep >= hypeData.length) {
+                        clearInterval(interval);
+                        narrative.innerText = "Phase 4: Aftermath. Retail investors trapped as smart money exits.";
+                        return;
+                    }
+
+                    app.charts['replay'].data.datasets[0].data.push(hypeData[currentStep]);
+                    app.charts['replay'].data.datasets[1].data.push(priceData[currentStep]);
+                    app.charts['replay'].update();
+
+                    if(currentStep === 3) narrative.innerText = "Phase 2: Retail FOMO triggers. Price begins lagging ascent.";
+                    if(currentStep === 6) narrative.innerText = "Phase 3: The Dump. Insiders sell off liquidity, crashing the price.";
+
+                    currentStep++;
+                }, 800);
+            },
+
+            // --- Insights Lab Logic ---
+            initInsightsCharts() {
+                // Crowd Madness Doughnut
+                setTimeout(() => {
+                    const ctx1 = document.getElementById('madnessChart').getContext('2d');
+                    if(app.charts['madness']) app.charts['madness'].destroy();
+                    app.charts['madness'] = new Chart(ctx1, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Extreme FOMO', 'Calm', 'Fear'],
+                            datasets: [{
+                                data: [75, 15, 10],
+                                backgroundColor: ['#C71824', '#5BB539', '#0A36D9'],
+                                borderWidth: 0,
+                                cutout: '80%'
+                            }]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            plugins: { legend: { position: 'bottom', labels: {color: '#fff'} } }
+                        }
+                    });
+
+                    // Virality DNA Bubble Chart
+                    const ctx2 = document.getElementById('viralityChart').getContext('2d');
+                    if(app.charts['virality']) app.charts['virality'].destroy();
+                    
+                    const bubbleData = Array.from({length: 20}, () => ({
+                        x: Math.random() * 100,
+                        y: Math.random() * 100,
+                        r: Math.random() * 20 + 5
+                    }));
+
+                    app.charts['virality'] = new Chart(ctx2, {
+                        type: 'bubble',
+                        data: {
+                            datasets: [{
+                                label: 'Attention Nodes',
+                                data: bubbleData,
+                                backgroundColor: 'rgba(242, 208, 59, 0.6)',
+                                borderColor: '#F2D03B'
+                            }]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            scales: {
+                                x: { display: false }, y: { display: false }
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }, 100);
+            },
+
+            // --- Time Travel Logic ---
+            loadTimeTravel() {
+                const era = document.getElementById('era-select').value;
+                const results = document.getElementById('time-travel-results');
+                const story = document.getElementById('tt-story');
+                results.style.display = 'block';
+
+                let labels, price, hype, text;
+
+                if(era === '2021-bull') {
+                    labels = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb'];
+                    price = [40, 60, 69, 45, 38];
+                    hype = [50, 80, 100, 90, 60];
+                    text = "Late 2021: Hype reached absolute maximum (100/100) exactly as price peaked. The Reality Score plummeted to 20, flashing a massive AVOID signal weeks before the macro top.";
+                } else if (era === '2022-crash') {
+                    labels = ['Mar', 'Apr', 'May', 'Jun', 'Jul'];
+                    price = [45, 40, 28, 18, 20];
+                    hype = [40, 35, 90, 85, 30]; // Hype spikes as panic/news hits
+                    text = "Mid 2022 Contagion: Notice the inverse divergence. Hype (panic mentions) spiked to 90 while price collapsed. The Decision Engine shifted to WATCH as capitulation volume peaked.";
+                } else {
+                    labels = ['Oct 23', 'Nov 23', 'Dec 23', 'Jan 24', 'Feb 24'];
+                    price = [28, 35, 42, 48, 60];
+                    hype = [30, 40, 60, 95, 70];
+                    text = "ETF Approval Era: A classic 'Buy the rumor, sell the news' setup. Hype peaked exactly on approval day, but Price Strength remained robust, keeping the Reality Score in the BUY/WATCH zone.";
+                }
+
+                story.innerText = text;
+
+                setTimeout(() => {
+                    const ctx = document.getElementById('timeTravelChart').getContext('2d');
+                    if(app.charts['tt']) app.charts['tt'].destroy();
+
+                    app.charts['tt'] = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                { label: 'Historical Price (Normalized)', data: price, borderColor: '#5BB539', tension: 0.4 },
+                                { label: 'Historical Hype', data: hype, borderColor: '#C71824', borderDash: [5,5], tension: 0.4 }
+                            ]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            scales: {
+                                x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#A0AEC0' } },
+                                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#A0AEC0' } }
+                            },
+                            plugins: { legend: { labels: { color: '#FFF' } } }
+                        }
+                    });
+                }, 50);
+            },
+
+            // --- Alerts System ---
+            triggerRandomAlert() {
+                if(document.getElementById('intro-page').style.display !== 'none') return;
+
+                const alerts = [
+                    { coin: 'PEPE', msg: 'Anomalous social volume detected. Reality Score dropping.', type: 'danger' },
+                    { coin: 'BTC', msg: 'Smart money accumulation increasing. Reality Score upgraded.', type: 'positive' },
+                    { coin: 'DOGE', msg: 'Elon tweet detected. Hype spiking +400%. Proceed with caution.', type: 'alert' }
+                ];
+
+                const alert = alerts[Math.floor(Math.random() * alerts.length)];
+                
+                const toast = document.createElement('div');
+                toast.className = 'alert-toast';
+                
+                let color = 'var(--alert)';
+                if(alert.type === 'danger') color = 'var(--danger)';
+                if(alert.type === 'positive') color = 'var(--positive)';
+                
+                toast.style.borderLeftColor = color;
+                
+                toast.innerHTML = `
+                    <div>
+                        <strong style="color: ${color}; font-family: 'Space Grotesk', sans-serif;">ALERT: ${alert.coin}</strong>
+                        <div style="font-size: 0.85rem; margin-top: 5px; color: var(--text-muted);">${alert.msg}</div>
+                    </div>
+                    <button style="background:none; border:none; color:white; cursor:pointer; font-size:1.2rem;" onclick="this.parentElement.remove()">×</button>
+                `;
+
+                const container = document.getElementById('alerts-container');
+                container.appendChild(toast);
+
+                // Play optional sound (simulated, no actual file required to prevent errors, just logic)
+                // const audio = new Audio('alert.mp3'); audio.play().catch(e=>{});
+
+                setTimeout(() => {
+                    if(toast.parentElement) {
+                        toast.style.animation = 'slide-out-right 0.3s forwards';
+                        setTimeout(() => toast.remove(), 300);
+                    }
+                }, 5000);
+            }
+        };
+
+        // Initialize App on Load
+        window.onload = app.init;
+
+    </script>
+</body>
+</html>
