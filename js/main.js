@@ -668,3 +668,31 @@
     };
 
     window.onload = CX.init;
+
+    /* ============================================================
+       FIREBASE MEMECOIN LISTENER (Runs in background)
+    ============================================================ */
+    setTimeout(() => {
+      // Check if Firebase was initialized in index.html
+      if (window.firebaseApp) {
+        import("https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js")
+          .then((module) => {
+            const { getDatabase, ref, onValue } = module;
+            const db = getDatabase(window.firebaseApp);
+            const memecoinRef = ref(db, 'solana_memecoins');
+            
+            // Listen to the data you upload from upload_csv.py
+            onValue(memecoinRef, (snapshot) => {
+              const liveData = snapshot.val();
+              if (liveData) {
+                const coinCount = Object.keys(liveData).length;
+                console.log(`🔥 SUCCESS: Silently grabbed ${coinCount} Meme Coins from Firebase backend!`, liveData);
+                CX.toast('📦', 'DATABASE SYNC', `Fetched ${coinCount} custom coins from Firebase! Check console.`, 'positive');
+                
+                // Note: To display this data on the dashboard, you will need to map these items into 
+                // the global COINS array format! For now, they are perfectly synced in the background.
+              }
+            });
+          }).catch(err => console.error("Firebase DB Error:", err));
+      }
+    }, 5500); // Wait 5.5s so it doesn't interrupt the initial dashboard loading animations
