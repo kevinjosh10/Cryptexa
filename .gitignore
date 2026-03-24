@@ -1,0 +1,11 @@
+# Environement variables
+.env
+
+# Firebase backend credentials (if manually recreated)
+firebase_credentials.json
+
+# Environment/dependencies
+node_modules/
+__pycache__/
+venv/
+.venv/
