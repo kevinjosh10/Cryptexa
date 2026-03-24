@@ -23,7 +23,7 @@ cred_dict = {
 try:
     cred = credentials.Certificate(cred_dict)
     firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://cryptexa-9cbaf-default-rtdb.firebaseio.com'
+        'databaseURL': 'https://cryptexa-9cbaf-default-rtdb.asia-southeast1.firebasedatabase.app'
     })
     
     # 2. Read the CSV file you downloaded from Kaggle (you will need to run: pip install pandas)

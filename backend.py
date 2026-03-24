@@ -26,7 +26,7 @@ try:
     # Initialize the app with a service account & Realtime DB URL
     cred = credentials.Certificate(cred_dict)
     firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://cryptexa-9cbaf-default-rtdb.firebaseio.com' 
+        'databaseURL': 'https://cryptexa-9cbaf-default-rtdb.asia-southeast1.firebasedatabase.app' 
     })
 
     print("Firebase Admin successfully initialized securely from .env!")
