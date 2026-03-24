@@ -758,6 +758,25 @@
     </div>
   </div>
 
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY", // Update this from your Firebase Project Settings
+      authDomain: "cryptexa-9cbaf.firebaseapp.com",
+      databaseURL: "https://cryptexa-9cbaf-default-rtdb.firebaseio.com",
+      projectId: "cryptexa-9cbaf",
+      storageBucket: "cryptexa-9cbaf.firebasestorage.app",
+      messagingSenderId: "201366192043",
+      appId: "1:201366192043:web:YOUR_APP_ID", // Update this from your Firebase Project Settings
+      measurementId: "G-YOUR_MEASUREMENT_ID" // Optional
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    window.firebaseApp = app; 
+  </script>
   <script src="js/main.js"></script>
 </body>
 

@@ -1,0 +1,35 @@
+{
+  "users": {
+    "USER_UID_1": {
+      "email": "trader@example.com",
+      "createdAt": 1711234567890,
+      "portfolio": {
+        "btc": 0.5,
+        "eth": 4.2
+      },
+      "saved_scans": {
+        "SCAN_ID_1": {
+          "coinId": "pepe",
+          "realityScore": 20,
+          "decision": "AVOID",
+          "smartMoney": 5,
+          "timestamp": 1711234567890
+        }
+      }
+    }
+  },
+  "market_history": {
+    "2026-03-24": {
+      "btc": {
+        "hype": 42,
+        "priceStrength": 85,
+        "realityScore": 72
+      },
+      "floki": {
+        "hype": 98,
+        "priceStrength": 18,
+        "realityScore": 10
+      }
+    }
+  }
+}
