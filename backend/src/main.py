@@ -26,7 +26,7 @@ try:
     # Initialize the app with a service account & Realtime DB URL
     cred = credentials.Certificate(cred_dict)
     firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://cryptexa-9cbaf-default-rtdb.asia-southeast1.firebasedatabase.app' 
+        'databaseURL': os.getenv('FIREBASE_DATABASE_URL') 
     })
 
     print("Firebase Admin successfully initialized securely from .env!")
@@ -42,4 +42,4 @@ try:
     #     'realityScore': 85
     # })
 except Exception as e:
-    print(f"Error initializing Firebase: {e}\nDid you 'pip install python-dotenv'?")
+    print(f"Error initializing Firebase: {e}\nDid you 'pip install -r requirements.txt' and setup your .env?")

@@ -1,10 +1,10 @@
     /* ============================================================
        COINGECKO CONFIG
     ============================================================ */
-    const CG_KEY = 'CG-ZieMdW15Bh6P9zGjgUegF4yJ';
+    const CG_KEY = window.ENV?.COINGECKO_API_KEY || '';
     const CG_BASE = 'https://api.coingecko.com/api/v3';
     const CG_IDS = 'bitcoin,ethereum,binancecoin,solana,ripple,cardano,avalanche-2,chainlink,polkadot,matic-network,arbitrum,injective-protocol,celestia,dogecoin,shiba-inu,pepe,dogwifhat,floki';
-    const CG_HEADERS = { 'x-cg-demo-api-key': CG_KEY };
+    const CG_HEADERS = CG_KEY ? { 'x-cg-demo-api-key': CG_KEY } : {};
     const REFRESH_INTERVAL = 60000;
 
     /* ============================================================

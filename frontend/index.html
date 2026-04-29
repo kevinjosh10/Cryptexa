@@ -758,19 +758,20 @@
     </div>
   </div>
 
+  <script src="env.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyAXq5NC5-eiEqLonDiKKMGxF8k25kBeQVE",
-      authDomain: "cryptexa-9cbaf.firebaseapp.com",
-      databaseURL: "https://cryptexa-9cbaf-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "cryptexa-9cbaf",
-      storageBucket: "cryptexa-9cbaf.firebasestorage.app",
-      messagingSenderId: "201366192043",
-      appId: "1:201366192043:web:1d1a8d12b29df8805a9cee",
-      measurementId: "G-T3LY1DGCBY"
+      apiKey: window.ENV?.FIREBASE?.API_KEY || "demo",
+      authDomain: window.ENV?.FIREBASE?.AUTH_DOMAIN || "demo",
+      databaseURL: window.ENV?.FIREBASE?.DATABASE_URL || "demo",
+      projectId: window.ENV?.FIREBASE?.PROJECT_ID || "demo",
+      storageBucket: window.ENV?.FIREBASE?.STORAGE_BUCKET || "demo",
+      messagingSenderId: window.ENV?.FIREBASE?.MESSAGING_SENDER_ID || "demo",
+      appId: window.ENV?.FIREBASE?.APP_ID || "demo",
+      measurementId: window.ENV?.FIREBASE?.MEASUREMENT_ID || "demo"
     };
 
     const app = initializeApp(firebaseConfig);

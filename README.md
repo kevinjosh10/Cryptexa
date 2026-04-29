@@ -1,78 +1,125 @@
 <div align="center">
-  
-  # 🔮 Cryptexa: Decoding Market Manipulation
-  
-  **A real-time, algorithmic trend intelligence system designed to protect retail investors from exit liquidity traps by mathematically separating verifiable on-chain volume from social media hype.**
+  <img src="https://img.icons8.com/?size=100&id=64835&format=png&color=000000" alt="Cryptexa Logo" width="80" height="80">
+  <h1 align="center">Cryptexa</h1>
+  <p align="center">
+    <strong>Market Manipulation & Trend Intelligence System</strong>
+  </p>
+  <p align="center">
+    A professional, full-stack intelligence platform that decodes hype, exposes market manipulation, and tracks real-time cryptocurrency divergence using CoinGecko and Firebase.
+  </p>
 
-  ![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-  ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
-  ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-  ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+  <p align="center">
+    <a href="#features">Features</a> •
+    <a href="#architecture">Architecture</a> •
+    <a href="#installation">Installation</a> •
+    <a href="#security">Security</a> •
+    <a href="#technologies">Technologies</a>
+  </p>
 
+  <p align="center">
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+    <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
+  </p>
 </div>
 
 ---
 
-## 🛑 The Problem: The "Exit Liquidity" Trap
-Cryptocurrency markets are heavily driven by algorithmic bot manipulation and artificial social media euphoria. Retail investors frequently buy assets at local highs ("FOMO") due to hype, only to be dumped on by institutional whales ("Smart Money"). Existing crypto trackers only display *what* the price is doing, failing to explain *why*.
+## ⚡ Overview
 
-## ✅ The Solution: The Reality Score
-Cryptexa is a visual forensics terminal. It calculates a proprietary **Reality Score (0-100)** by aggressively contrasting an asset's actual on-chain volume and price strength against its social media hype index. 
-If Hype massively outweighs Volume, the system flashes a **🔴 RED (AVOID)** signal, alerting the user to an imminent pump-and-dump. 
+**Cryptexa** is an advanced market intelligence dashboard designed to separate genuine crypto market momentum from artificial social media hype. It uses an algorithmic **Reality Score** to warn traders about imminent pump-and-dump schemes, tracks hidden gems, and simulates market conditions.
 
----
+This repository features a **modular full-stack architecture**, cleanly separating the vanilla JavaScript frontend from the Python data pipeline backend.
 
-## 🔥 Core Features
+## 🚀 Key Features
 
-- 📊 **Intelligent Dashboard:** A live grid tracking cryptocurrencies in real-time using the **CoinGecko API**. Features instant algorithmic BUY/WATCH/AVOID signals and 7D Sparkline momentum graphs.
-- 🔬 **The Coin Lab (Deep Dive):** Renders a dual-axis divergence chart plotting Price Strength against Social Hype, exposing "Wash Trading" and "Spoofing" fingerprints.
-- 🕹️ **Manipulation Simulators:** Interactive "What-If" sliders allow users to manually pump Hype or crash Volume to see exactly how algorithms detect market manipulation in real-time.
-- ⏳ **Time Travel Backtesting:** Proves the algorithm's validity by passing historical black swan events (e.g., the 2022 Terra/Luna $40B collapse) through the Reality Score engine.
-- 🧠 **Insights Lab:** Visualizes macro market psychology through an 'Attention Gravity Map' (Bubble Chart), a 'Crowd Madness Index' (Fear & Greed Gauge), and an 'Intelligence Matrix' (Radar Chart).
-- 🛡️ **Risk/Reward Manager:** A professional trading tool forcing users into mathematical safety by calculating exact portfolio position sizing based on strict R/R ratios.
+*   **Real-time Intelligence Matrix:** Tracks 18 leading assets with live price feeds via the CoinGecko API.
+*   **Reality Score Engine:** Computes a unique metric based on the divergence between *Price Strength* and *Social Hype Intensity*.
+*   **Manipulation Lab:** Features a "What-If Simulator" allowing users to adjust volume, whale activity, and hype to model outcomes.
+*   **Historical Time Travel:** Analyze past market anomalies (e.g., 2021 Bull Run, 2022 Terra Crash) to validate trading models.
+*   **Trading Tools:** Includes an integrated RSI Calculator, Risk/Reward position sizer, and side-by-side coin comparison mode.
+*   **Dark Mode Glassmorphic UI:** A premium, fully responsive interface featuring CSS micro-animations and Chart.js visualizations.
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## 🏗️ Architecture & Project Structure
 
-Cryptexa is built for absolute maximum performance, rendering complex 60fps animations dynamically without relying on bloated frontend frameworks. 
+The project has been refactored into a scalable, production-ready structure:
 
-### Frontend (The Client)
-- **100% Vanilla JavaScript:** Direct DOM manipulation and encapsulation inside a global `CX` state manager for zero-latency UI updates.
-- **Custom CSS / Glassmorphism:** Designed completely from scratch using native CSS `:root` variables.
-- **Chart.js:** Handling instantaneous geometric rendering of Line, Radar, Bubble, and Doughnut charts.
-
-### Backend (The Pipeline)
-- **Firebase Realtime Database:** A serverless NoSQL cloud database syncing data to the client instantly via WebSockets.
-- **Python Admin SDK:** A secure `backend.py` and `upload_csv.py` environment used for heavy lifting (e.g., parsing massive 3,000+ Meme Coin CSV datasets from Kaggle into JSON and blasting them to Firebase).
-- **`python-dotenv`:** Strict security protocol ensuring Firebase Admin Service Account keys are never committed to the source code.
+```text
+Cryptexa/
+├── frontend/                  # Web Client (Vanilla JS, HTML, CSS)
+│   ├── index.html             # Application entry point
+│   ├── env.example.js         # Template for frontend secrets
+│   ├── css/
+│   │   └── style.css          # Core styles & Glassmorphism UI
+│   └── js/
+│       └── main.js            # Unified logic, Chart configurations, and API controllers
+│
+├── backend/                   # Python Data Pipeline
+│   ├── .env.example           # Template for backend secrets
+│   ├── requirements.txt       # Python dependencies
+│   ├── src/
+│   │   ├── main.py            # Firebase admin initialization
+│   │   ├── upload_csv.py      # Utility to sync local CSVs to Realtime Database
+│   │   └── extract_assets.py  # Image extraction utility
+│   └── tests/
+│       └── test_firebase.py   # Unit tests for backend services
+│
+├── docs/                      # Documentation
+│   └── database_schema.json   # Firebase schema structure
+│
+└── .gitignore                 # Security exclusion file
+```
 
 ---
 
-## 🚀 Installation & Local Setup
+## 🛠️ Installation & Setup
 
-### 1. The Frontend (Standard Install)
-Because the frontend is pure HTML/JS/CSS, no build tools or package managers are required!
-1. Clone the repository.
-2. Open `index.html` in your browser (or use VS Code Live Server).
-3. The app is live!
-
-### 2. The Python Backend (Optional Firebase Sync)
-If you wish to use the Python backend to upload the Solana Memecoin dataset or run custom server-side analytics:
-1. Ensure Python 3.9+ is installed.
-2. Install the required dependencies:
+### 1. Frontend Setup
+1. Navigate to the `frontend/` directory.
+2. Duplicate `env.example.js` and rename it to `env.js`.
+3. Fill in your CoinGecko API key and Firebase configuration in `env.js`.
+4. Serve the `frontend/` directory using any local web server (e.g., Live Server or Python HTTP Server):
    ```bash
-   pip install firebase-admin python-dotenv pandas
+   python -m http.server 3000
    ```
-3. Look inside the `.env` file and ensure your Firebase Admin secrets are securely pasted inside.
-4. Run the upload script to parse the Kaggle CSV and populate your Realtime Database:
+
+### 2. Backend Setup
+1. Navigate to the `backend/` directory.
+2. Install the required Python dependencies:
    ```bash
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file based on `.env.example` and add your Firebase credentials.
+4. Place your Firebase service account key inside the `backend/` folder (name it `firebase_credentials.json`).
+5. Run the CSV upload script to sync your market data to Firebase:
+   ```bash
+   cd src/
    python upload_csv.py
    ```
-5. Open your `index.html` file. Wait 5 seconds, and watch the console. The frontend's background listener will automatically catch the newly uploaded Memecoins from Firebase!
+
+---
+
+## 🔐 Security & Best Practices
+
+This project adheres to strict security standards:
+*   **Zero Hardcoded Secrets:** All API keys and Database URLs have been stripped from the codebase and moved to environment variables (`.env` and `env.js`).
+*   **Secure `.gitignore`:** Prevents accidental commits of `firebase_credentials.json`, `.env`, and `env.js` files.
+*   **Modular Architecture:** Clean separation of frontend UI state and backend Python services.
+
+---
+
+## 💻 Technologies Used
+
+*   **Frontend:** HTML5, Vanilla CSS3, Vanilla JavaScript (ES6+).
+*   **Libraries:** Chart.js (Data Visualization).
+*   **Backend:** Python 3, `firebase-admin`, `pandas`, `python-dotenv`.
+*   **Database:** Firebase Realtime Database.
+*   **APIs:** CoinGecko V3, Alternative.me (Fear & Greed Index).
 
 ---
 
 <div align="center">
-  <i>Built to decode the noise. Trade on Reality.</i>
+  <p>Designed and built for traders who want to see past the noise.</p>
 </div>

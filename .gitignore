@@ -1,11 +1,18 @@
-# Environement variables
+# Environment variables & Secrets
 .env
-
-# Firebase backend credentials (if manually recreated)
-firebase_credentials.json
+env.js
+frontend/env.js
+backend/.env
+backend/firebase_credentials.json
 
 # Environment/dependencies
 node_modules/
 __pycache__/
 venv/
 .venv/
+.pytest_cache/
+
+# Logs and Build
+logs/
+*.log
+.DS_Store
