@@ -9,6 +9,11 @@
   </p>
 
   <p align="center">
+    <a href="https://kevinjosh10.github.io/Cryptexa/frontend/index.html"><strong>🔴 Live Demo</strong></a> •
+    <a href="https://github.com/kevinjosh10/Cryptexa"><strong>📂 Source Code</strong></a>
+  </p>
+
+  <p align="center">
     <a href="#features">Features</a> •
     <a href="#architecture">Architecture</a> •
     <a href="#installation">Installation</a> •
@@ -21,6 +26,14 @@
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
     <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
   </p>
+</div>
+
+---
+
+## 🏆 Achievements
+
+<div align="center">
+  <img src="hacka-cert1.jpeg" alt="Hackathon Certificate" width="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
 </div>
 
 ---
