@@ -1,46 +1,43 @@
 <div align="center">
-  <img src="https://img.icons8.com/?size=100&id=64835&format=png&color=000000" alt="Cryptexa Logo" width="80" height="80">
-  <h1 align="center">Cryptexa</h1>
-  <p align="center">
-    <strong>Market Manipulation & Trend Intelligence System</strong>
-  </p>
-  <p align="center">
-    A professional, full-stack intelligence platform that decodes hype, exposes market manipulation, and tracks real-time cryptocurrency divergence using CoinGecko and Firebase.
-  </p>
+  <img width="100" height="100" alt="bit" src="https://github.com/user-attachments/assets/1ff462df-074c-4e91-a465-262ab7bf6886"/>
+  
+  # **Cryptexa**
+  
+  **Market Manipulation & Trend Intelligence System</strong>**
 
-  <p align="center">
-    <a href="#features">Features</a> •
-    <a href="#architecture">Architecture</a> •
-    <a href="#installation">Installation</a> •
-    <a href="#security">Security</a> •
-    <a href="#technologies">Technologies</a>
-  </p>
+A professional, full-stack intelligence platform that decodes hype, exposes market manipulation, and tracks real-time cryptocurrency divergence using CoinGecko and Firebase.
 
-  <p align="center">
+<br/>
+
+[Overview](#-overview) • [Features](#-key-features) • [Architecture](#-architecture--project-structure) • [Installation](#-installation--setup) • [Security](#-security--best-practices) • [Technologies](#-technologies)
+
+<p align="center">
     <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
     <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
-  </p>
+  
 </div>
 
----
+<br/>
 
-## ⚡ Overview
+## <img width="23" height="23" alt="overview" src="https://github.com/user-attachments/assets/dd1d6fee-2516-45c0-bab0-f61c498091e1" /> Overview
 
 **Cryptexa** is an advanced market intelligence dashboard designed to separate genuine crypto market momentum from artificial social media hype. It uses an algorithmic **Reality Score** to warn traders about imminent pump-and-dump schemes, tracks hidden gems, and simulates market conditions.
 
 This repository features a **modular full-stack architecture**, cleanly separating the vanilla JavaScript frontend from the Python data pipeline backend.
 
-## 🚀 Key Features
+<br/>
+
+## <img width="25" height="25" alt="feature" src="https://github.com/user-attachments/assets/0e2be0f0-96f8-4953-925c-4dfba1bd409a" /> Key Features
 
 *   **Real-time Intelligence Matrix:** Tracks 18 leading assets with live price feeds via the CoinGecko API.
 *   **Reality Score Engine:** Computes a unique metric based on the divergence between *Price Strength* and *Social Hype Intensity*.
-*   **Manipulation Lab:** Features a "What-If Simulator" allowing users to adjust volume, whale activity, and hype to model outcomes.
-*   **Historical Time Travel:** Analyze past market anomalies (e.g., 2021 Bull Run, 2022 Terra Crash) to validate trading models.
+*   **Manipulation Lab:** Features a 'What-If Simulator' allowing users to adjust volume, whale activity, and hype to model outcomes.
+*   **Historical Time Travel:** Analyzes past market anomalies (e.g., 2021 Bull Run, 2022 Terra Crash) to validate trading models.
 *   **Trading Tools:** Includes an integrated RSI Calculator, Risk/Reward position sizer, and side-by-side coin comparison mode.
 *   **Dark Mode Glassmorphic UI:** A premium, fully responsive interface featuring CSS micro-animations and Chart.js visualizations.
 
----
+<br/>
 
 ## 🏗️ Architecture & Project Structure
 
@@ -72,7 +69,7 @@ Cryptexa/
 └── .gitignore                 # Security exclusion file
 ```
 
----
+<br/>
 
 ## 🛠️ Installation & Setup
 
@@ -99,7 +96,7 @@ Cryptexa/
    python upload_csv.py
    ```
 
----
+<br/>
 
 ## 🔐 Security & Best Practices
 
@@ -108,18 +105,20 @@ This project adheres to strict security standards:
 *   **Secure `.gitignore`:** Prevents accidental commits of `firebase_credentials.json`, `.env`, and `env.js` files.
 *   **Modular Architecture:** Clean separation of frontend UI state and backend Python services.
 
----
+<br/>
 
-## 💻 Technologies Used
+## <img width="30" height="30" alt="tech" src="https://github.com/user-attachments/assets/863cfb66-1423-4c4e-8502-8aa2d74704a7" /> Technologies
 
-*   **Frontend:** HTML5, Vanilla CSS3, Vanilla JavaScript (ES6+).
-*   **Libraries:** Chart.js (Data Visualization).
-*   **Backend:** Python 3, `firebase-admin`, `pandas`, `python-dotenv`.
-*   **Database:** Firebase Realtime Database.
-*   **APIs:** CoinGecko V3, Alternative.me (Fear & Greed Index).
+*   **Frontend:** HTML5, Vanilla CSS3, Vanilla JavaScript (ES6+)
+*   **Libraries:** Chart.js (Data Visualization)
+*   **Backend:** Python 3, `firebase-admin`, `pandas`, `python-dotenv`
+*   **Database:** Firebase Realtime Database
+*   **APIs:** CoinGecko V3, Alternative.me (Fear & Greed Index)
 
----
+<br/>
 
 <div align="center">
-  <p>Designed and built for traders who want to see past the noise.</p>
+  
+*Designed and built for traders who want to see past the noise.*
+
 </div>
