@@ -1,26 +1,32 @@
 <div align="center">
-  <img width="100" height="100" alt="bit" src="https://github.com/user-attachments/assets/1ff462df-074c-4e91-a465-262ab7bf6886"/>
-  
-  # **Cryptexa**
-  
-  **Market Manipulation & Trend Intelligence System</strong>**
+  <img src="https://github.com/user-attachments/assets/1ff462df-074c-4e91-a465-262ab7bf6886" alt="Cryptexa Logo" width="120" height="120">
 
-  <p align="center">
+  <h1>Cryptexa</h1>
+  <p><strong>Market Manipulation & Trend Intelligence System</strong></p>
+
+  <p>A professional, full-stack intelligence platform that decodes hype, exposes market manipulation, and tracks real-time cryptocurrency divergence using CoinGecko and Firebase.</p>
+
+  <br />
+
+  <p>
     <a href="https://kevinjosh10.github.io/Cryptexa/frontend/index.html"><strong>🔴 Live Demo</strong></a> •
     <a href="https://github.com/kevinjosh10/Cryptexa"><strong>📂 Source Code</strong></a>
   </p>
 
-A professional, full-stack intelligence platform that decodes hype, exposes market manipulation, and tracks real-time cryptocurrency divergence using CoinGecko and Firebase.
+  <p>
+    <a href="#-overview">Overview</a> • 
+    <a href="#-key-features">Features</a> • 
+    <a href="#%EF%B8%8F-architecture--project-structure">Architecture</a> • 
+    <a href="#%EF%B8%8F-installation--setup">Installation</a> • 
+    <a href="#-security--best-practices">Security</a> • 
+    <a href="#-technologies">Technologies</a>
+  </p>
 
-<br/>
-
-[Overview](#-overview) • [Features](#-key-features) • [Architecture](#-architecture--project-structure) • [Installation](#-installation--setup) • [Security](#-security--best-practices) • [Technologies](#-technologies)
-
-<p align="center">
+  <p>
     <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
     <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
-  
+  </p>
 </div>
 
 <br/>
@@ -28,7 +34,7 @@ A professional, full-stack intelligence platform that decodes hype, exposes mark
 ## 🏆 Achievements
 
 <div align="center">
-  <img src="hacka-cert1.jpeg" alt="Hackathon Certificate" width="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+  <img src="hacka-cert1.jpeg" alt="Hackathon Certificate" width="700" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);">
 </div>
 
 <br/>
@@ -48,7 +54,7 @@ This repository features a **modular full-stack architecture**, cleanly separati
 *   **Manipulation Lab:** Features a 'What-If Simulator' allowing users to adjust volume, whale activity, and hype to model outcomes.
 *   **Historical Time Travel:** Analyzes past market anomalies (e.g., 2021 Bull Run, 2022 Terra Crash) to validate trading models.
 *   **Trading Tools:** Includes an integrated RSI Calculator, Risk/Reward position sizer, and side-by-side coin comparison mode.
-*   **Dark Mode Glassmorphic UI:** A premium, fully responsive interface featuring CSS micro-animations and Chart.js visualizations.
+*   **Premium UI/UX:** A sleek, fully responsive dark-mode interface featuring glassmorphism, micro-animations, and Chart.js data visualizations.
 
 <br/>
 
@@ -89,7 +95,7 @@ Cryptexa/
 ### 1. Frontend Setup
 1. Navigate to the `frontend/` directory.
 2. Duplicate `env.example.js` and rename it to `env.js`.
-3. Fill in your CoinGecko API key and Firebase configuration in `env.js`.
+3. Fill in your CoinGecko API key and Firebase configuration inside `env.js`.
 4. Serve the `frontend/` directory using any local web server (e.g., Live Server or Python HTTP Server):
    ```bash
    python -m http.server 3000
